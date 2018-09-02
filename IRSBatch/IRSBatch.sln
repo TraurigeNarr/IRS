@@ -1,0 +1,66 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "IRSBatch", "IRSBatch\IRSBatch.vcxproj", "{BAB4259D-9425-4402-945F-5946D53567D0}"
+	ProjectSection(ProjectDependencies) = postProject
+		{0912BFB8-CD06-4E45-B84D-C504DBCAB902} = {0912BFB8-CD06-4E45-B84D-C504DBCAB902}
+		{2C4D08F6-4F12-4813-B39A-0DBC000455E5} = {2C4D08F6-4F12-4813-B39A-0DBC000455E5}
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "MathBase", "MathBase\MathBase.vcxproj", "{0912BFB8-CD06-4E45-B84D-C504DBCAB902}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "MathTests", "MathTests\MathTests.vcxproj", "{2A92A982-3809-4543-BDA7-067487C6A68C}"
+	ProjectSection(ProjectDependencies) = postProject
+		{0912BFB8-CD06-4E45-B84D-C504DBCAB902} = {0912BFB8-CD06-4E45-B84D-C504DBCAB902}
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Algorithms", "Algorithms\Algorithms.vcxproj", "{2C4D08F6-4F12-4813-B39A-0DBC000455E5}"
+	ProjectSection(ProjectDependencies) = postProject
+		{0912BFB8-CD06-4E45-B84D-C504DBCAB902} = {0912BFB8-CD06-4E45-B84D-C504DBCAB902}
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		DebugStatic|Win32 = DebugStatic|Win32
+		Release|Win32 = Release|Win32
+		ReleaseStatic|Win32 = ReleaseStatic|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{BAB4259D-9425-4402-945F-5946D53567D0}.Debug|Win32.ActiveCfg = Debug|Win32
+		{BAB4259D-9425-4402-945F-5946D53567D0}.Debug|Win32.Build.0 = Debug|Win32
+		{BAB4259D-9425-4402-945F-5946D53567D0}.DebugStatic|Win32.ActiveCfg = DebugStatic|Win32
+		{BAB4259D-9425-4402-945F-5946D53567D0}.DebugStatic|Win32.Build.0 = DebugStatic|Win32
+		{BAB4259D-9425-4402-945F-5946D53567D0}.Release|Win32.ActiveCfg = Release|Win32
+		{BAB4259D-9425-4402-945F-5946D53567D0}.Release|Win32.Build.0 = Release|Win32
+		{BAB4259D-9425-4402-945F-5946D53567D0}.ReleaseStatic|Win32.ActiveCfg = ReleaseStatic|Win32
+		{BAB4259D-9425-4402-945F-5946D53567D0}.ReleaseStatic|Win32.Build.0 = ReleaseStatic|Win32
+		{0912BFB8-CD06-4E45-B84D-C504DBCAB902}.Debug|Win32.ActiveCfg = Debug|Win32
+		{0912BFB8-CD06-4E45-B84D-C504DBCAB902}.Debug|Win32.Build.0 = Debug|Win32
+		{0912BFB8-CD06-4E45-B84D-C504DBCAB902}.DebugStatic|Win32.ActiveCfg = DebugStatic|Win32
+		{0912BFB8-CD06-4E45-B84D-C504DBCAB902}.DebugStatic|Win32.Build.0 = DebugStatic|Win32
+		{0912BFB8-CD06-4E45-B84D-C504DBCAB902}.Release|Win32.ActiveCfg = Release|Win32
+		{0912BFB8-CD06-4E45-B84D-C504DBCAB902}.Release|Win32.Build.0 = Release|Win32
+		{0912BFB8-CD06-4E45-B84D-C504DBCAB902}.ReleaseStatic|Win32.ActiveCfg = ReleaseStatic|Win32
+		{0912BFB8-CD06-4E45-B84D-C504DBCAB902}.ReleaseStatic|Win32.Build.0 = ReleaseStatic|Win32
+		{2A92A982-3809-4543-BDA7-067487C6A68C}.Debug|Win32.ActiveCfg = Debug|Win32
+		{2A92A982-3809-4543-BDA7-067487C6A68C}.Debug|Win32.Build.0 = Debug|Win32
+		{2A92A982-3809-4543-BDA7-067487C6A68C}.DebugStatic|Win32.ActiveCfg = DebugStatic|Win32
+		{2A92A982-3809-4543-BDA7-067487C6A68C}.DebugStatic|Win32.Build.0 = DebugStatic|Win32
+		{2A92A982-3809-4543-BDA7-067487C6A68C}.Release|Win32.ActiveCfg = Release|Win32
+		{2A92A982-3809-4543-BDA7-067487C6A68C}.Release|Win32.Build.0 = Release|Win32
+		{2A92A982-3809-4543-BDA7-067487C6A68C}.ReleaseStatic|Win32.ActiveCfg = ReleaseStatic|Win32
+		{2A92A982-3809-4543-BDA7-067487C6A68C}.ReleaseStatic|Win32.Build.0 = ReleaseStatic|Win32
+		{2C4D08F6-4F12-4813-B39A-0DBC000455E5}.Debug|Win32.ActiveCfg = Debug|Win32
+		{2C4D08F6-4F12-4813-B39A-0DBC000455E5}.Debug|Win32.Build.0 = Debug|Win32
+		{2C4D08F6-4F12-4813-B39A-0DBC000455E5}.DebugStatic|Win32.ActiveCfg = DebugStatic|Win32
+		{2C4D08F6-4F12-4813-B39A-0DBC000455E5}.DebugStatic|Win32.Build.0 = DebugStatic|Win32
+		{2C4D08F6-4F12-4813-B39A-0DBC000455E5}.Release|Win32.ActiveCfg = Release|Win32
+		{2C4D08F6-4F12-4813-B39A-0DBC000455E5}.Release|Win32.Build.0 = Release|Win32
+		{2C4D08F6-4F12-4813-B39A-0DBC000455E5}.ReleaseStatic|Win32.ActiveCfg = ReleaseStatic|Win32
+		{2C4D08F6-4F12-4813-B39A-0DBC000455E5}.ReleaseStatic|Win32.Build.0 = ReleaseStatic|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

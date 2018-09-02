@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Maintanance">
+      <UniqueIdentifier>{23f71be7-4ae3-43ee-8453-a1cd72118bc7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Tests">
+      <UniqueIdentifier>{394ee501-5af1-4b52-a24a-df34badb1d7f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Tests\MathBase">
+      <UniqueIdentifier>{96f49847-9e5c-4793-910d-4a4bedec7be3}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="stdafx.h">
+      <Filter>Maintanance</Filter>
+    </ClInclude>
+    <ClInclude Include="targetver.h">
+      <Filter>Maintanance</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="MathTests.cpp">
+      <Filter>Maintanance</Filter>
+    </ClCompile>
+    <ClCompile Include="stdafx.cpp">
+      <Filter>Maintanance</Filter>
+    </ClCompile>
+    <ClCompile Include="TestKDTree.cpp">
+      <Filter>Tests\MathBase</Filter>
+    </ClCompile>
+    <ClCompile Include="TestMatrix.cpp">
+      <Filter>Tests\MathBase</Filter>
+    </ClCompile>
+    <ClCompile Include="TestPlane.cpp">
+      <Filter>Tests\MathBase</Filter>
+    </ClCompile>
+    <ClCompile Include="TestVector.cpp">
+      <Filter>Tests\MathBase</Filter>
+    </ClCompile>
+    <ClCompile Include="_LinkingLibraries.cpp">
+      <Filter>Maintanance</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>

@@ -1,0 +1,85 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Text Include="ReadMe.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Math">
+      <UniqueIdentifier>{fd9e9f08-a665-42a4-846f-7eaca8cf706b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Clustering">
+      <UniqueIdentifier>{084d6053-230d-4f36-854b-7483b93a349f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Division.Functions">
+      <UniqueIdentifier>{eed87b38-1321-431f-9872-601831b10151}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="math\Box3D.cpp">
+      <Filter>Math</Filter>
+    </ClCompile>
+    <ClCompile Include="math\Box3DIterator.cpp">
+      <Filter>Math</Filter>
+    </ClCompile>
+    <ClCompile Include="math\KDTree.cpp">
+      <Filter>Math</Filter>
+    </ClCompile>
+    <ClCompile Include="math\Matrix3D.cpp">
+      <Filter>Math</Filter>
+    </ClCompile>
+    <ClCompile Include="math\Plane3D.cpp">
+      <Filter>Math</Filter>
+    </ClCompile>
+    <ClCompile Include="math\Triangle3D.cpp">
+      <Filter>Math</Filter>
+    </ClCompile>
+    <ClCompile Include="math\Vector3D.cpp">
+      <Filter>Math</Filter>
+    </ClCompile>
+    <ClCompile Include="Cluster.cpp">
+      <Filter>Clustering</Filter>
+    </ClCompile>
+    <ClCompile Include="ClassHandler.cpp">
+      <Filter>Clustering</Filter>
+    </ClCompile>
+    <ClCompile Include="LinearDivisionFunction.cpp">
+      <Filter>Division.Functions</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="math\Box3D.h">
+      <Filter>Math</Filter>
+    </ClInclude>
+    <ClInclude Include="math\Box3DIterator.h">
+      <Filter>Math</Filter>
+    </ClInclude>
+    <ClInclude Include="math\KDTree.h">
+      <Filter>Math</Filter>
+    </ClInclude>
+    <ClInclude Include="math\Matrix3D.h">
+      <Filter>Math</Filter>
+    </ClInclude>
+    <ClInclude Include="math\Plane3D.h">
+      <Filter>Math</Filter>
+    </ClInclude>
+    <ClInclude Include="math\Triangle3D.h">
+      <Filter>Math</Filter>
+    </ClInclude>
+    <ClInclude Include="math\Vector3D.h">
+      <Filter>Math</Filter>
+    </ClInclude>
+    <ClInclude Include="Cluster.h">
+      <Filter>Clustering</Filter>
+    </ClInclude>
+    <ClInclude Include="Types.h" />
+    <ClInclude Include="ClassHandler.h">
+      <Filter>Clustering</Filter>
+    </ClInclude>
+    <ClInclude Include="IDivisionFunction.h">
+      <Filter>Division.Functions</Filter>
+    </ClInclude>
+    <ClInclude Include="LinearDivisionFunction.h">
+      <Filter>Division.Functions</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

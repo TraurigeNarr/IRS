@@ -1,0 +1,390 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="UI">
+      <UniqueIdentifier>{7f972dd9-9c9b-476f-8b88-f80d7c2c4b19}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UI\Base">
+      <UniqueIdentifier>{e2a292d2-595c-4383-b846-e14ca4cab95a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Maintanance">
+      <UniqueIdentifier>{4e181e63-055c-47d0-8d82-c898da44608a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Program">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Renderer">
+      <UniqueIdentifier>{a3167990-c503-4969-b8c2-877e479dc6a2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Renderer\Renderable">
+      <UniqueIdentifier>{979674b6-f52f-4002-beaf-a223d20e5133}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core">
+      <UniqueIdentifier>{5401e3e9-54c3-4119-8a61-84383384258b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UI\Modes">
+      <UniqueIdentifier>{9ee355e4-1d32-46e1-a862-ce5ed83abf86}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UI\Mice">
+      <UniqueIdentifier>{faa1cea7-e742-4075-90e1-5e0294908fc4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UI\Modes\ClusteringMode">
+      <UniqueIdentifier>{e2c87ad1-6a22-4224-aecb-0f8988aac953}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UI\Modes\SimpleMode">
+      <UniqueIdentifier>{a7fe298c-7e05-4073-8a36-d35920b10d69}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UI\Base\PropertyGrid">
+      <UniqueIdentifier>{186c5e65-d1dc-4df5-8f57-606a06abea81}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Renderer\OpenGL">
+      <UniqueIdentifier>{c0b5b1d1-f84f-4123-8e8e-f9a7ce47b36b}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="IRSBatch.h">
+      <Filter>Program</Filter>
+    </ClInclude>
+    <ClInclude Include="MainFrm.h">
+      <Filter>UI\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="IRSBatchDoc.h">
+      <Filter>UI\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="IRSBatchView.h">
+      <Filter>UI\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="RendererFrame.h">
+      <Filter>Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="Renderer.h">
+      <Filter>Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="stdafx.h">
+      <Filter>Maintanance</Filter>
+    </ClInclude>
+    <ClInclude Include="targetver.h">
+      <Filter>Maintanance</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource.h">
+      <Filter>Resource Files</Filter>
+    </ClInclude>
+    <ClInclude Include="IRenderable.h">
+      <Filter>Renderer\Renderable</Filter>
+    </ClInclude>
+    <ClInclude Include="Grid.h">
+      <Filter>Renderer\Renderable</Filter>
+    </ClInclude>
+    <ClInclude Include="Database.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Types.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="TabController.h">
+      <Filter>UI\Modes</Filter>
+    </ClInclude>
+    <ClInclude Include="ModeTypes.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="IMode.h">
+      <Filter>UI\Modes</Filter>
+    </ClInclude>
+    <ClInclude Include="CommandHandler.h">
+      <Filter>UI\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="MouseController.h">
+      <Filter>UI\Mice</Filter>
+    </ClInclude>
+    <ClInclude Include="Vertex.h">
+      <Filter>Renderer\Renderable</Filter>
+    </ClInclude>
+    <ClInclude Include="MouseCorePoint.h">
+      <Filter>UI\Mice</Filter>
+    </ClInclude>
+    <ClInclude Include="MousePoints.h">
+      <Filter>UI\Mice</Filter>
+    </ClInclude>
+    <ClInclude Include="IMouse.h">
+      <Filter>UI\Mice</Filter>
+    </ClInclude>
+    <ClInclude Include="SimpleMouse.h">
+      <Filter>UI\Mice</Filter>
+    </ClInclude>
+    <ClInclude Include="ClusterRenderer.h">
+      <Filter>Renderer\Renderable</Filter>
+    </ClInclude>
+    <ClInclude Include="ModeInformation.h">
+      <Filter>UI\Modes</Filter>
+    </ClInclude>
+    <ClInclude Include="ClassHandlerRenderer.h">
+      <Filter>Renderer\Renderable</Filter>
+    </ClInclude>
+    <ClInclude Include="EditBox.h">
+      <Filter>UI\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="ClusteringMode.h">
+      <Filter>UI\Modes\ClusteringMode</Filter>
+    </ClInclude>
+    <ClInclude Include="ClusteringAlgoPage.h">
+      <Filter>UI\Modes\ClusteringMode</Filter>
+    </ClInclude>
+    <ClInclude Include="PointsPage.h">
+      <Filter>UI\Modes</Filter>
+    </ClInclude>
+    <ClInclude Include="NotificationManager.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Notifications.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="SimpleMode.h">
+      <Filter>UI\Modes\SimpleMode</Filter>
+    </ClInclude>
+    <ClInclude Include="TreeCtrlEx.h">
+      <Filter>UI\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="UI_Utilities.h">
+      <Filter>UI\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="Utilities.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="ISelectable.h">
+      <Filter>UI\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="DivisionFunctionsRenderer.h">
+      <Filter>Renderer\Renderable</Filter>
+    </ClInclude>
+    <ClInclude Include="ResultsPage.h">
+      <Filter>UI\Modes\ClusteringMode</Filter>
+    </ClInclude>
+    <ClInclude Include="EditPointDialog.h">
+      <Filter>UI\Modes</Filter>
+    </ClInclude>
+    <ClInclude Include="PropertyGrid.h">
+      <Filter>UI\Base\PropertyGrid</Filter>
+    </ClInclude>
+    <ClInclude Include="PropertyGridCombo.h">
+      <Filter>UI\Base\PropertyGrid</Filter>
+    </ClInclude>
+    <ClInclude Include="PropertyGridDirectoryPicker.h">
+      <Filter>UI\Base\PropertyGrid</Filter>
+    </ClInclude>
+    <ClInclude Include="PropertyGridInPlaceEdit.h">
+      <Filter>UI\Base\PropertyGrid</Filter>
+    </ClInclude>
+    <ClInclude Include="PropertyGridMonthCalCtrl.h">
+      <Filter>UI\Base\PropertyGrid</Filter>
+    </ClInclude>
+    <ClInclude Include="CustomItem.h">
+      <Filter>UI\Base\PropertyGrid</Filter>
+    </ClInclude>
+    <ClInclude Include="EditPoint.h">
+      <Filter>UI\Modes</Filter>
+    </ClInclude>
+    <ClInclude Include="CPointItem.h">
+      <Filter>UI\Modes</Filter>
+    </ClInclude>
+    <ClInclude Include="ImportExport.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="MouseBlocker.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="SettingsDialog.h">
+      <Filter>UI\Modes</Filter>
+    </ClInclude>
+    <ClInclude Include="IRenderer.h">
+      <Filter>Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="OpenGL_Renderer.h">
+      <Filter>Renderer\OpenGL</Filter>
+    </ClInclude>
+    <ClInclude Include="FreeType.h">
+      <Filter>Renderer\OpenGL</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="MainFrm.cpp">
+      <Filter>UI\Base</Filter>
+    </ClCompile>
+    <ClCompile Include="IRSBatchDoc.cpp">
+      <Filter>UI\Base</Filter>
+    </ClCompile>
+    <ClCompile Include="IRSBatchView.cpp">
+      <Filter>UI\Base</Filter>
+    </ClCompile>
+    <ClCompile Include="RendererFrame.cpp">
+      <Filter>Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="Renderer.cpp">
+      <Filter>Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="_LinkingLibraries.cpp">
+      <Filter>Maintanance</Filter>
+    </ClCompile>
+    <ClCompile Include="stdafx.cpp">
+      <Filter>Maintanance</Filter>
+    </ClCompile>
+    <ClCompile Include="IRSBatch.cpp">
+      <Filter>Program</Filter>
+    </ClCompile>
+    <ClCompile Include="Grid.cpp">
+      <Filter>Renderer\Renderable</Filter>
+    </ClCompile>
+    <ClCompile Include="Database.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="TabController.cpp">
+      <Filter>UI\Modes</Filter>
+    </ClCompile>
+    <ClCompile Include="IMode.cpp">
+      <Filter>UI\Modes</Filter>
+    </ClCompile>
+    <ClCompile Include="CommandHandler.cpp">
+      <Filter>UI\Base</Filter>
+    </ClCompile>
+    <ClCompile Include="MouseController.cpp">
+      <Filter>UI\Mice</Filter>
+    </ClCompile>
+    <ClCompile Include="Vertex.cpp">
+      <Filter>Renderer\Renderable</Filter>
+    </ClCompile>
+    <ClCompile Include="MouseCorePoint.cpp">
+      <Filter>UI\Mice</Filter>
+    </ClCompile>
+    <ClCompile Include="MousePoints.cpp">
+      <Filter>UI\Mice</Filter>
+    </ClCompile>
+    <ClCompile Include="SimpleMouse.cpp">
+      <Filter>UI\Mice</Filter>
+    </ClCompile>
+    <ClCompile Include="ClusterRenderer.cpp">
+      <Filter>Renderer\Renderable</Filter>
+    </ClCompile>
+    <ClCompile Include="ModeInformation.cpp">
+      <Filter>UI\Modes</Filter>
+    </ClCompile>
+    <ClCompile Include="ClassHandlerRenderer.cpp">
+      <Filter>Renderer\Renderable</Filter>
+    </ClCompile>
+    <ClCompile Include="EditBox.cpp">
+      <Filter>UI\Base</Filter>
+    </ClCompile>
+    <ClCompile Include="ClusteringMode.cpp">
+      <Filter>UI\Modes\ClusteringMode</Filter>
+    </ClCompile>
+    <ClCompile Include="ClusteringAlgoPage.cpp">
+      <Filter>UI\Modes\ClusteringMode</Filter>
+    </ClCompile>
+    <ClCompile Include="PointsPage.cpp">
+      <Filter>UI\Modes</Filter>
+    </ClCompile>
+    <ClCompile Include="NotificationManager.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="SimpleMode.cpp">
+      <Filter>UI\Modes\SimpleMode</Filter>
+    </ClCompile>
+    <ClCompile Include="TreeCtrlEx.cpp">
+      <Filter>UI\Base</Filter>
+    </ClCompile>
+    <ClCompile Include="UI_Utilities.cpp">
+      <Filter>UI\Base</Filter>
+    </ClCompile>
+    <ClCompile Include="Utilities.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="DivisionFunctionsRenderer.cpp">
+      <Filter>Renderer\Renderable</Filter>
+    </ClCompile>
+    <ClCompile Include="ResultsPage.cpp">
+      <Filter>UI\Modes\ClusteringMode</Filter>
+    </ClCompile>
+    <ClCompile Include="PropertyGrid.cpp">
+      <Filter>UI\Base\PropertyGrid</Filter>
+    </ClCompile>
+    <ClCompile Include="PropertyGridCombo.cpp">
+      <Filter>UI\Base\PropertyGrid</Filter>
+    </ClCompile>
+    <ClCompile Include="PropertyGridDirectoryPicker.cpp">
+      <Filter>UI\Base\PropertyGrid</Filter>
+    </ClCompile>
+    <ClCompile Include="PropertyGridInPlaceEdit.cpp">
+      <Filter>UI\Base\PropertyGrid</Filter>
+    </ClCompile>
+    <ClCompile Include="PropertyGridMonthCalCtrl.cpp">
+      <Filter>UI\Base\PropertyGrid</Filter>
+    </ClCompile>
+    <ClCompile Include="EditPointDialog.cpp">
+      <Filter>UI\Modes</Filter>
+    </ClCompile>
+    <ClCompile Include="EditPoint.cpp">
+      <Filter>UI\Modes</Filter>
+    </ClCompile>
+    <ClCompile Include="CPointItem.cpp">
+      <Filter>UI\Modes</Filter>
+    </ClCompile>
+    <ClCompile Include="ImportExport.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="SettingsDialog.cpp">
+      <Filter>UI\Modes</Filter>
+    </ClCompile>
+    <ClCompile Include="OpenGL_Renderer.cpp">
+      <Filter>Renderer\OpenGL</Filter>
+    </ClCompile>
+    <ClCompile Include="FreeType.cpp">
+      <Filter>Renderer\OpenGL</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="IRSBatch.rc">
+      <Filter>Resource Files</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="res\IRSBatch.rc2">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="C:\Users\Jester\Downloads\cursors\gray-rule-by-mei\Points.cur">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="arrow.cur">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="C:\Users\Jester\Downloads\cursors\gray-rule-by-mei\CorePoint.cur">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\arrow.cur">
+      <Filter>Resource Files</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="res\IRSBatchDoc.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\IRSBatch.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\toolbar1.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="ReadMe.txt">
+      <Filter>Maintanance</Filter>
+    </Text>
+  </ItemGroup>
+  <ItemGroup>
+    <Font Include="res\Test.ttf">
+      <Filter>Resource Files</Filter>
+    </Font>
+  </ItemGroup>
+</Project>

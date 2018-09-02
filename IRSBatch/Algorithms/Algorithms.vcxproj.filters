@@ -1,0 +1,81 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Maintanance">
+      <UniqueIdentifier>{2e976468-cbc9-4081-91c7-7fb1c1e7a91a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Base">
+      <UniqueIdentifier>{7d722d3f-f58f-4956-846e-6f995feb750c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Algorithms">
+      <UniqueIdentifier>{ee08eec6-6a93-47c3-be46-1d5be739771f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Algorithms\Clustering">
+      <UniqueIdentifier>{56f68af3-db27-4e25-8842-bb8ac68924da}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="targetver.h">
+      <Filter>Maintanance</Filter>
+    </ClInclude>
+    <ClInclude Include="stdafx.h">
+      <Filter>Maintanance</Filter>
+    </ClInclude>
+    <ClInclude Include="IAnalyzer.h">
+      <Filter>Base</Filter>
+    </ClInclude>
+    <ClInclude Include="AlgorithmManager.h">
+      <Filter>Base</Filter>
+    </ClInclude>
+    <ClInclude Include="SimpleSpaceDivider.h">
+      <Filter>Algorithms</Filter>
+    </ClInclude>
+    <ClInclude Include="AlgorithmsUtilities.h">
+      <Filter>Base</Filter>
+    </ClInclude>
+    <ClInclude Include="ClusteringK_Means.h">
+      <Filter>Algorithms\Clustering</Filter>
+    </ClInclude>
+    <ClInclude Include="ClusteringParameters.h">
+      <Filter>Algorithms\Clustering</Filter>
+    </ClInclude>
+    <ClInclude Include="Clustering_Maxmin.h">
+      <Filter>Algorithms\Clustering</Filter>
+    </ClInclude>
+    <ClInclude Include="Clustering_HeuristicBorder.h">
+      <Filter>Algorithms\Clustering</Filter>
+    </ClInclude>
+    <ClInclude Include="Reporter.h">
+      <Filter>Base</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="stdafx.cpp">
+      <Filter>Maintanance</Filter>
+    </ClCompile>
+    <ClCompile Include="_LinkLibraries.cpp">
+      <Filter>Maintanance</Filter>
+    </ClCompile>
+    <ClCompile Include="AlgorithmManager.cpp">
+      <Filter>Base</Filter>
+    </ClCompile>
+    <ClCompile Include="SimpleSpaceDivider.cpp">
+      <Filter>Algorithms</Filter>
+    </ClCompile>
+    <ClCompile Include="AlgorithmsUtilities.cpp">
+      <Filter>Base</Filter>
+    </ClCompile>
+    <ClCompile Include="ClusteringK_Means.cpp">
+      <Filter>Algorithms\Clustering</Filter>
+    </ClCompile>
+    <ClCompile Include="Clustering_Maxmin.cpp">
+      <Filter>Algorithms\Clustering</Filter>
+    </ClCompile>
+    <ClCompile Include="Clustering_HeuristicBorder.cpp">
+      <Filter>Algorithms\Clustering</Filter>
+    </ClCompile>
+    <ClCompile Include="Reporter.cpp">
+      <Filter>Base</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>
