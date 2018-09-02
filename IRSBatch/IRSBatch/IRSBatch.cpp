@@ -56,8 +56,8 @@ BOOL CIRSBatchApp::InitInstance()
 {
 	CWinApp::InitInstance();
 
-  NotificationManager::GetInstance();
-  IRS::Database::GetInstance();
+	NotificationManager::GetInstance();
+	IRS::Database::GetInstance()->Init();
 
 	// Initialize OLE libraries
 	if (!AfxOleInit())

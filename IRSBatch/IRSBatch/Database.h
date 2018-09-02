@@ -23,6 +23,7 @@ namespace IRS
     Database& operator=(const Database& i_other);
   public:
     static Database* GetInstance();
+	void Init();
 
     void Clear();
     void Update();

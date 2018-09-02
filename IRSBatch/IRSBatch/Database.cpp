@@ -14,9 +14,9 @@
 using namespace IRS;
 
 Database::Database()
-  : mp_renderer(nullptr)
-  , mh_grid(new Grid)
-  {  }
+	: mp_renderer(nullptr)
+{
+}
 
 Database::~Database()
   {
@@ -25,10 +25,15 @@ Database::~Database()
   }
 
 Database* Database::GetInstance()
-  {
-  static Database instance;
-  return &instance;
-  }
+{
+	static Database instance;
+	return &instance;
+}
+
+void Database::Init()
+{
+	mh_grid.reset(new Grid());
+}
 
 void Database::Clear()
   {

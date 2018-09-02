@@ -183,3 +183,7 @@ UpgradeLog*.htm
 # Microsoft Fakes
 FakesAssemblies/
 IRSBatch/MathTests/DebugStatic/MathTests.unsuccessfulbuild
+IRSBatch/.vs/
+*.ipdb
+*.iobj
+Binaries/

@@ -55,8 +55,6 @@ CMainFrame::~CMainFrame()
 {
   if (nullptr != mp_tab_controller)
     delete mp_tab_controller;
-  if (nullptr != mp_render_frame)
-    delete mp_render_frame;
 }
 
 int CMainFrame::OnCreate(LPCREATESTRUCT lpCreateStruct)
