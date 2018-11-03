@@ -1,6 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2012
+# Visual Studio 15
+VisualStudioVersion = 15.0.27703.2026
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "IRSBatch", "IRSBatch\IRSBatch.vcxproj", "{BAB4259D-9425-4402-945F-5946D53567D0}"
 	ProjectSection(ProjectDependencies) = postProject
 		{0912BFB8-CD06-4E45-B84D-C504DBCAB902} = {0912BFB8-CD06-4E45-B84D-C504DBCAB902}
@@ -46,11 +48,9 @@ Global
 		{2A92A982-3809-4543-BDA7-067487C6A68C}.Debug|Win32.ActiveCfg = Debug|Win32
 		{2A92A982-3809-4543-BDA7-067487C6A68C}.Debug|Win32.Build.0 = Debug|Win32
 		{2A92A982-3809-4543-BDA7-067487C6A68C}.DebugStatic|Win32.ActiveCfg = DebugStatic|Win32
-		{2A92A982-3809-4543-BDA7-067487C6A68C}.DebugStatic|Win32.Build.0 = DebugStatic|Win32
 		{2A92A982-3809-4543-BDA7-067487C6A68C}.Release|Win32.ActiveCfg = Release|Win32
 		{2A92A982-3809-4543-BDA7-067487C6A68C}.Release|Win32.Build.0 = Release|Win32
 		{2A92A982-3809-4543-BDA7-067487C6A68C}.ReleaseStatic|Win32.ActiveCfg = ReleaseStatic|Win32
-		{2A92A982-3809-4543-BDA7-067487C6A68C}.ReleaseStatic|Win32.Build.0 = ReleaseStatic|Win32
 		{2C4D08F6-4F12-4813-B39A-0DBC000455E5}.Debug|Win32.ActiveCfg = Debug|Win32
 		{2C4D08F6-4F12-4813-B39A-0DBC000455E5}.Debug|Win32.Build.0 = Debug|Win32
 		{2C4D08F6-4F12-4813-B39A-0DBC000455E5}.DebugStatic|Win32.ActiveCfg = DebugStatic|Win32
@@ -62,5 +62,8 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {AF0265FC-8C5F-4262-BACF-B759971FFFE8}
 	EndGlobalSection
 EndGlobal

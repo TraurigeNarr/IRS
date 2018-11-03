@@ -105,45 +105,60 @@ void CRendererFrame::Dump(CDumpContext& dc) const
 
 // CPaintWnd message handlers
 
+std::pair<int, int> ConvertMouseParams(WPARAM wParam, LPARAM lParam)
+{
+	return std::make_pair(GET_X_LPARAM(lParam), GET_Y_LPARAM(lParam));
+}
+
 LRESULT CRendererFrame::WindowProc(UINT message, WPARAM wParam, LPARAM lParam)
 {
-  switch (message)
-  {
-  case WM_MOUSEMOVE:
-    {
-      if (!m_mouse_over)
-      {
-        CommandHandlerInstance->TrackMouseLeave(GetSafeHwnd(), wParam, lParam);
-        m_mouse_over = true;
-      }
-    }
-    break;
-  case WM_LBUTTONUP:
-    {
-      MouseClicked(wParam, lParam);
-    }
-    break;
-  case WM_MOUSELEAVE:
-    {
-      m_mouse_over = false;
-    }
-    break;
-  case WM_NCDESTROY:
-    mp_renderer_impl->Release();
-    mp_renderer_impl.reset(nullptr);
-    break;
-  default:
-    break;
-  }
-  return CView::WindowProc(message, wParam, lParam);
+	switch (message)
+	{
+	case WM_MOUSEMOVE:
+		{
+			auto coords = ConvertMouseParams(wParam, lParam);
+			MouseControllerInstance->Move(this, coords.first, coords.second);
+			if (!m_mouse_over)
+			{
+				CommandHandlerInstance->TrackMouseLeave(GetSafeHwnd(), wParam, lParam);
+				m_mouse_over = true;
+			}
+		}
+		break;
+	case WM_LBUTTONUP:
+		{
+			auto coords = ConvertMouseParams(wParam, lParam);
+			MouseControllerInstance->MouseUp(this, coords.first, coords.second);
+			MouseClicked(wParam, lParam);
+		}
+		break;
+	case WM_LBUTTONDOWN:
+		{
+			auto coords = ConvertMouseParams(wParam, lParam);
+			MouseControllerInstance->MouseDown(this, coords.first, coords.second);
+		}
+		break;
+	case WM_MOUSELEAVE:
+		{
+			m_mouse_over = false;
+		}
+		break;
+	case WM_NCDESTROY:
+		mp_renderer_impl->Release();
+		mp_renderer_impl.reset(nullptr);
+		break;
+	default:
+		break;
+	}
+	return CView::WindowProc(message, wParam, lParam);
 }
 
 BOOL CRendererFrame::OnSetCursor(CWnd* pWnd, UINT nHitTest, UINT message)
 {
-  if (MouseControllerInstance->SetCursor(pWnd, nHitTest, message))
-    return TRUE;
+	if (MouseControllerInstance->SetCursor(pWnd, nHitTest, message))
+		return TRUE;
 
-  return CView::OnSetCursor(pWnd, nHitTest, message);
+	return CView::OnSetCursor(pWnd, nHitTest, message);
 }
 
 
@@ -151,5 +166,5 @@ BOOL CRendererFrame::OnSetCursor(CWnd* pWnd, UINT nHitTest, UINT message)
 
 void CRendererFrame::MouseClicked(WPARAM wParam, LPARAM lParam)
 {
-  MouseControllerInstance->MouseClicked(this, wParam, lParam);
+	MouseControllerInstance->MouseClicked(this, wParam, lParam);
 }

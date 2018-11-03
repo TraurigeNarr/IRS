@@ -27,11 +27,11 @@ IMPLEMENT_DYNCREATE(CMainFrame, CFrameWndEx)
 
 BEGIN_MESSAGE_MAP(CMainFrame, CFrameWndEx)
 	ON_WM_CREATE()
-  ON_WM_SIZE()
-  ON_WM_GETMINMAXINFO()
-  ON_COMMAND_RANGE(ID_MODE_SIMPLEMODE, ID_MODE_CLUSTERING, &CMainFrame::OnModeSwitch)
-  ON_COMMAND_RANGE(ID_SETTINGS_MODEMOUSE, ID_SETTINGS_SELECTIONMOUSE, &CMainFrame::OnMouseSwitch)
-  ON_COMMAND(ID_SETTINGS_SETTINGS, &CMainFrame::OnSettings)
+	ON_WM_SIZE()
+	ON_WM_GETMINMAXINFO()
+	ON_COMMAND_RANGE(ID_MODE_SIMPLEMODE, ID_MODE_CLUSTERING, &CMainFrame::OnModeSwitch)
+	ON_COMMAND_RANGE(ID_SETTINGS_MODEMOUSE, ID_SETTINGS_MOUSEBRUSH, &CMainFrame::OnMouseSwitch)
+	ON_COMMAND(ID_SETTINGS_SETTINGS, &CMainFrame::OnSettings)
 END_MESSAGE_MAP()
 
 static UINT indicators[] =
@@ -161,20 +161,28 @@ void CMainFrame::OnModeSwitch(UINT i_id)
 
 void CMainFrame::OnMouseSwitch(UINT i_id)
 {
-  CMenu* p_menu = GetMenu();
-  switch(i_id)
-  {
-  case ID_SETTINGS_MODEMOUSE:
-    MouseControllerInstance->SetMouse(mp_tab_controller->GetCurrentMode()->GetInformation().GetMouseType());
-    p_menu->CheckMenuItem(ID_SETTINGS_MODEMOUSE, MF_CHECKED);
-    p_menu->CheckMenuItem(ID_SETTINGS_SELECTIONMOUSE, MF_UNCHECKED);
-    break;
-  case ID_SETTINGS_SELECTIONMOUSE:
-    MouseControllerInstance->SetMouse(MOUSE_SIMPLE);
-    p_menu->CheckMenuItem(ID_SETTINGS_SELECTIONMOUSE, MF_CHECKED);
-    p_menu->CheckMenuItem(ID_SETTINGS_MODEMOUSE, MF_UNCHECKED);
-    break;
-  }
+	CMenu* p_menu = GetMenu();
+
+	for (int i = ID_SETTINGS_MODEMOUSE; i <= ID_SETTINGS_MOUSEBRUSH; ++i)
+	{
+		p_menu->CheckMenuItem(i, MF_UNCHECKED);
+	}
+
+	switch (i_id)
+	{
+	case ID_SETTINGS_MODEMOUSE:
+		MouseControllerInstance->SetMouse(mp_tab_controller->GetCurrentMode()->GetInformation().GetMouseType());
+		p_menu->CheckMenuItem(i_id, MF_CHECKED);
+		break;
+	case ID_SETTINGS_SELECTIONMOUSE:
+		MouseControllerInstance->SetMouse(MOUSE_SIMPLE);
+		p_menu->CheckMenuItem(i_id, MF_CHECKED);
+		break;
+	case ID_SETTINGS_MOUSEBRUSH:
+		MouseControllerInstance->SetMouse(MOUSE_BRUSH);
+		p_menu->CheckMenuItem(i_id, MF_CHECKED);
+		break;
+	}
 }
 
 void CMainFrame::OnSettings()

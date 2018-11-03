@@ -13,6 +13,7 @@ private:
   bool          m_draw_class_division_functions;
   bool          m_draw_class_decision_functions;
   bool          m_log_on_each_iteration;
+  bool			m_show_point_numbers;
   double        m_grid_x_scale[2];
   size_t        m_grid_divisions_number;
 
@@ -36,11 +37,13 @@ public:
   void            SetDrawFunctions(bool i_draw_decision, bool i_draw_division);
   void            SetLog(bool i_log_on_each_iteration);
   void            SetGridDivisionsNumber(size_t i_number);
+  void            SetShowPointNumbers(bool i_show_point_numbers);
 
   double          GetGridXScaleMin() const;
   double          GetGridXScaleMax() const;
   bool            DrawDecisionFunctions() const;
   bool            DrawDivisionFunctions() const;
   bool            LogOnEachIteration() const;
+  bool            ShowPointNumbers() const;
   size_t          GetGridDivisionsNumber() const;
 };

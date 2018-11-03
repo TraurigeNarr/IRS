@@ -3,8 +3,12 @@
 #include "Vertex.h"
 
 #include "MainFrm.h"
+#include "IMode.h"
 #include "Renderer.h"
 #include "Grid.h"
+
+#include "MainFrm.h"
+#include "ModeInformation.h"
 
 #include "Database.h"
 #include "IRenderer.h"
@@ -51,9 +55,14 @@ void Vertex::Draw(IRenderer* ip_renderer) const
     }
 
   //draw index of vertex
-  char text[5];
-  sprintf_s(text, "%d", GetIndex());
-  ip_renderer->RenderText(Vector3D(coordinates.x+3,coordinates.y-5,0.), text, IRS::CL_BLACK);
+  CMainFrame* pMainWnd = (CMainFrame *)AfxGetMainWnd();
+  ModeInformation& mode_info = pMainWnd->GetController()->GetCurrentMode()->GetInformation();
+  if (mode_info.ShowPointNumbers())
+  {
+	  char text[10];
+	  sprintf_s(text, "%d", GetIndex());
+	  ip_renderer->RenderText(Vector3D(coordinates.x + 3, coordinates.y - 5, 0.), text, IRS::CL_BLACK);
+  }
   }
 
 Vector3D Vertex::GetPosition() const

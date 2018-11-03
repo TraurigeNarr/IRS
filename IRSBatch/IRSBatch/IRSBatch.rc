@@ -80,6 +80,7 @@ END
 
 IDR_TOOLBAR1            BITMAP                  "res\\toolbar1.bmp"
 
+
 /////////////////////////////////////////////////////////////////////////////
 //
 // Dialog
@@ -321,7 +322,9 @@ END
 // Icon with lowest ID value placed first to ensure application icon
 // remains consistent on all systems.
 IDR_MAINFRAME           ICON                    "res\\IRSBatch.ico"
+
 IDR_IRSBatchTYPE        ICON                    "res\\IRSBatchDoc.ico"
+
 
 /////////////////////////////////////////////////////////////////////////////
 //
@@ -366,6 +369,7 @@ BEGIN
     BEGIN
         MENUITEM "Mode mouse",                  ID_SETTINGS_MODEMOUSE, CHECKED
         MENUITEM "Selection mouse",             ID_SETTINGS_SELECTIONMOUSE
+        MENUITEM "Mouse brush",                 ID_SETTINGS_MOUSEBRUSH
         MENUITEM "Display settings",            ID_SETTINGS_SETTINGS
     END
     POPUP "&Help"
@@ -444,8 +448,11 @@ END
 //
 
 ID_CURSOR_POINTS        CURSOR                  "res\\arrow.cur"
+
 ID_CURSOR_SIMPLE        CURSOR                  "res\\arrow.cur"
+
 ID_CURSOR_CORE_POINT    CURSOR                  "res\\arrow.cur"
+
 
 /////////////////////////////////////////////////////////////////////////////
 //
@@ -477,6 +484,7 @@ BEGIN
     IDS_SETTINGS_DRAW_DECISION_FUNCTIONS "Draw decision functions"
     IDS_SETTINGS_DRAW_DIVISION_FUNCTIONS "Draw division functions"
     IDS_SETTINGS_LOG_ON_EACH_ITERATION "Log on each iteration"
+    IDS_SETTINGS_SHOW_POINT_NUMBERS "Show point numbers"
 END
 
 STRINGTABLE

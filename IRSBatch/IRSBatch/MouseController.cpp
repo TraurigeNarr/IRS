@@ -4,6 +4,8 @@
 #include "MouseCorePoint.h"
 #include "MousePoints.h"
 #include "SimpleMouse.h"
+#include "MouseBrush.h"
+
 
 #include <algorithm>
 
@@ -30,6 +32,7 @@ void MouseController::_InitMice()
   m_mice.push_back(new SelectionMouse());
   m_mice.push_back(new MouseCorePoint());
   m_mice.push_back(new MousePoints());
+  m_mice.push_back(new MouseBrush());
 
   m_current = m_mice[0];
   m_current->OnActivate();
@@ -66,6 +69,27 @@ void MouseController::MouseClicked(CView* ip_view, WPARAM wParam, LPARAM lParam)
 {
   ASSERT(nullptr != m_current);
   m_current->MouseClicked(ip_view, wParam, lParam);
+}
+
+void MouseController::MouseDown(CView* ip_view, int x, int y)
+{
+	if (m_current)  {
+		m_current->MouseDown(ip_view, x, y);
+	}
+}
+
+void MouseController::MouseUp(CView* ip_view, int x, int y)
+{
+	if (m_current) {
+		m_current->MouseUp(ip_view, x, y);
+	}
+}
+
+void MouseController::Move(CView* ip_view, int x, int y)
+{
+	if (m_current) {
+		m_current->Move(ip_view, x, y);
+	}
 }
 
 bool MouseController::SetCursor(CWnd* pWnd, UINT nHitTest, UINT message)

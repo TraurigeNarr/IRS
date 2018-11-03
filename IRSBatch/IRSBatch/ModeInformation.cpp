@@ -4,8 +4,9 @@
 
 //////////////////////////////////////////////////////////////////////////
 
-const int g_colors[] = 
-{                                   
+
+const int g_colors[] =
+{
   0x8A2BE2FF,   //BlueViolet =                
   0xA52A2AFF,   //Brown =                     
   0x5F9EA0FF,   //CadetBlue =                 
@@ -76,48 +77,49 @@ const int g_colors[] =
 
 const char g_names[] =
 {
-  'A',
-  'B',
-  'C',
-  'D',
-  'E',
-  'F',
-  'G',
-  'H',
-  'I',
-  'J',
-  'K',
-  'L',
-  'M',
-  'N',
-  'O',
-  'P',
-  'Q',
-  'R',
-  'S',
-  'T',
-  'U',
-  'V',
-  'W',
-  'X',
-  'Y',
-  'Z'
-};
+	  'A',
+	  'B',
+	  'C',
+	  'D',
+	  'E',
+	  'F',
+	  'G',
+	  'H',
+	  'I',
+	  'J',
+	  'K',
+	  'L',
+	  'M',
+	  'N',
+	  'O',
+	  'P',
+	  'Q',
+	  'R',
+	  'S',
+	  'T',
+	  'U',
+	  'V',
+	  'W',
+	  'X',
+	  'Y',
+	  'Z'
+	};
 
 //////////////////////////////////////////////////////////////////////////
 
 ModeInformation::ModeInformation()
-  : m_next_color(0)
-  , m_name_template(L"Cluster")
-  , m_next_name_index(0)
-  , m_next_point_index(0)
-  , m_mouse_type(MOUSE_SIMPLE)
-  , m_grid_divisions_number(10)
-  , m_draw_class_decision_functions(false)
-  , m_draw_class_division_functions(true)
-  , m_log_on_each_iteration(true)
+	: m_next_color(0)
+	, m_name_template(L"Cluster")
+	, m_next_name_index(0)
+	, m_next_point_index(0)
+	, m_mouse_type(MOUSE_SIMPLE)
+	, m_grid_divisions_number(10)
+	, m_draw_class_decision_functions(false)
+	, m_draw_class_division_functions(true)
+	, m_log_on_each_iteration(true)
+	, m_show_point_numbers(true)
 {
-  Flush();
+	Flush();
 }
 
 ModeInformation::~ModeInformation()
@@ -127,112 +129,123 @@ ModeInformation::~ModeInformation()
 
 void ModeInformation::Flush()
 {
-  m_next_core_point_index = m_next_point_index = m_next_name_index = m_next_color = 0;
-  m_grid_x_scale[0] = -10;
-  m_grid_x_scale[1] = 10;
-  m_grid_divisions_number = 10;
-  m_draw_class_division_functions = true;
-  m_draw_class_decision_functions = false;
-  m_log_on_each_iteration = true;
+	m_next_core_point_index = m_next_point_index = m_next_name_index = m_next_color = 0;
+	m_grid_x_scale[0] = -10;
+	m_grid_x_scale[1] = 10;
+	m_grid_divisions_number = 10;
+	m_draw_class_division_functions = true;
+	m_draw_class_decision_functions = false;
+	m_log_on_each_iteration = true;
+	m_show_point_numbers = false;
 }
 
 void ModeInformation::SetCorePointNameTemplate(const std::wstring& i_template)
 {
-  m_name_template = i_template;
+	m_name_template = i_template;
 }
 
 std::wstring ModeInformation::GetNextClusterName()
 {
-  std::wstring name = m_name_template;
-  name += ' ';
-  size_t names_count = sizeof(g_names)/sizeof(char);
-  
-  size_t digits = 1;
+	std::wstring name = m_name_template;
+	name += ' ';
+	size_t names_count = sizeof(g_names) / sizeof(char);
 
-  if (true)
-  {
-    size_t temp = 1;
-    while ((temp*=names_count) < m_next_point_index)
-      ++digits;
-  }
+	size_t digits = 1;
 
-  size_t index = m_next_name_index++;
-  for (size_t i = 0; i < digits; ++i)
-  {
-    name += g_names[index%names_count];
-    index /= names_count;
-  }
-  return name;
+	if (true)
+	{
+		size_t temp = 1;
+		while ((temp *= names_count) < m_next_point_index)
+			++digits;
+	}
+
+	size_t index = m_next_name_index++;
+	for (size_t i = 0; i < digits; ++i)
+	{
+		name += g_names[index%names_count];
+		index /= names_count;
+	}
+	return name;
 }
 
 int ModeInformation::GetNextColorRGBA()
 {
-  return g_colors[m_next_color++%(sizeof(g_colors)/sizeof(int))];
+	return g_colors[m_next_color++ % (sizeof(g_colors) / sizeof(int))];
 }
 
 size_t ModeInformation::GetNextPointIndex()
 {
-  return ++m_next_point_index;
+	return ++m_next_point_index;
 }
 
 MouseType ModeInformation::GetMouseType()
 {
-  return m_mouse_type;
+	return m_mouse_type;
 }
 
 void ModeInformation::SetCurrentMouse(MouseType i_type)
 {
-  m_mouse_type = i_type;
+	m_mouse_type = i_type;
 }
 
 double          ModeInformation::GetGridXScaleMin() const
-  {
-  return m_grid_x_scale[0];
-  }
+{
+	return m_grid_x_scale[0];
+}
 
 double          ModeInformation::GetGridXScaleMax() const
-  {
-  return m_grid_x_scale[1];
-  }
+{
+	return m_grid_x_scale[1];
+}
 
 bool            ModeInformation::DrawDecisionFunctions() const
-  {
-  return m_draw_class_decision_functions;
-  }
+{
+	return m_draw_class_decision_functions;
+}
 
 bool            ModeInformation::DrawDivisionFunctions() const
-  {
-  return m_draw_class_division_functions;
-  }
+{
+	return m_draw_class_division_functions;
+}
 
 bool            ModeInformation::LogOnEachIteration() const
-  {
-  return m_log_on_each_iteration;
-  }
+{
+	return m_log_on_each_iteration;
+}
 
 size_t          ModeInformation::GetGridDivisionsNumber() const
-  {
-  return m_grid_divisions_number;
-  }
+{
+	return m_grid_divisions_number;
+}
 
 void            ModeInformation::SetGridScale(double i_scale[2])
-  {
-  m_grid_x_scale[0] = i_scale[0];
-  m_grid_x_scale[1] = i_scale[1];
-  }
+{
+	m_grid_x_scale[0] = i_scale[0];
+	m_grid_x_scale[1] = i_scale[1];
+}
 
 void            ModeInformation::SetDrawFunctions(bool i_draw_decision, bool i_draw_division)
-  {
-  m_draw_class_decision_functions = i_draw_decision;
-  m_draw_class_division_functions = i_draw_division;
-  }
+{
+	m_draw_class_decision_functions = i_draw_decision;
+	m_draw_class_division_functions = i_draw_division;
+}
 
 void            ModeInformation::SetLog(bool i_log_on_each_iteration)
-  {
-  m_log_on_each_iteration = i_log_on_each_iteration;
-  }
+{
+	m_log_on_each_iteration = i_log_on_each_iteration;
+}
 
 void            ModeInformation::SetGridDivisionsNumber(size_t i_number)
-  {
-  m_grid_divisions_number = i_number;
-  }
+{
+	m_grid_divisions_number = i_number;
+}
+
+void ModeInformation::SetShowPointNumbers(bool i_show_point_numbers)
+{
+	m_show_point_numbers = i_show_point_numbers;
+}
+
+bool ModeInformation::ShowPointNumbers() const
+{
+	return m_show_point_numbers;
+}

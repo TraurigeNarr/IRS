@@ -20,6 +20,7 @@ class CSettingsDialog : public CDialogEx
     ICustomItem* mp_grid_scale_custom_item;
 
     HITEM m_log_on_each_iteration;
+	HITEM m_show_point_numbers;
 
     IMode* mp_owner;
 

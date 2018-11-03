@@ -6,6 +6,7 @@ enum MouseType
   MOUSE_SIMPLE,
   MOUSE_CORE_POINT,
   MOUSE_POINTS,
+  MOUSE_BRUSH
 };
 
 class IMouse
@@ -26,6 +27,9 @@ public:
   virtual ~IMouse(){}
 
   virtual void MouseClicked(CView* ip_view, WPARAM wParam, LPARAM lParam) = 0;
+  virtual void MouseDown(CView* ip_view, int x, int y) {}
+  virtual void MouseUp(CView* ip_view, int x, int y) {}
+  virtual void Move(CView* ip_view, int x, int y) {}
   virtual void OnActivate() = 0;
   virtual void OnDeactivate() = 0;
 

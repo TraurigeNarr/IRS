@@ -46,6 +46,7 @@
 #define IDS_SETTINGS_DRAW_DECISION_FUNCTIONS 132
 #define IDS_SETTINGS_DRAW_DIVISION_FUNCTIONS 133
 #define IDS_SETTINGS_LOG_ON_EACH_ITERATION 134
+#define IDS_SETTINGS_SHOW_POINT_NUMBERS 135
 #define ID_CURSOR_POINTS                318
 #define ID_CURSOR_CORE_POINT            320
 #define IDR_TOOLBAR1                    321
@@ -94,14 +95,15 @@
 #define IDT_MAIN_TOOLBAR                32774
 #define ID_SETTINGS_MODEMOUSE           32775
 #define ID_SETTINGS_SELECTIONMOUSE      32776
-#define ID_SETTINGS_SETTINGS            32777
+#define ID_SETTINGS_MOUSEBRUSH          32777
+#define ID_SETTINGS_SETTINGS            32778
 
 // Next default values for new objects
 // 
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_NEXT_RESOURCE_VALUE        331
-#define _APS_NEXT_COMMAND_VALUE         32778
+#define _APS_NEXT_COMMAND_VALUE         32779
 #define _APS_NEXT_CONTROL_VALUE         1050
 #define _APS_NEXT_SYMED_VALUE           310
 #endif

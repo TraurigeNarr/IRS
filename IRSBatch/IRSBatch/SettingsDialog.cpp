@@ -12,12 +12,13 @@
 #include "Database.h"
 
 CSettingsDialog::CSettingsDialog(IMode* ip_owner, CWnd* pParent /* = NULL */)
-  : CDialogEx(CSettingsDialog::IDD, pParent)
-  , m_log_on_each_iteration(true)
-  , mp_owner(ip_owner)
-  , mp_grid_scale_custom_item(nullptr)
-  {
-  }
+	: CDialogEx(CSettingsDialog::IDD, pParent)
+	, m_log_on_each_iteration(true)
+	, m_show_point_numbers(true)
+	, mp_owner(ip_owner)
+	, mp_grid_scale_custom_item(nullptr)
+{
+}
 
 CSettingsDialog::~CSettingsDialog()
   {
@@ -58,6 +59,9 @@ void CSettingsDialog::_Initialize()
 
   res_string.LoadString(IDS_SETTINGS_LOG_ON_EACH_ITERATION);
   m_log_on_each_iteration = m_property_grid.AddBoolItem(hs, res_string.GetString(), information.LogOnEachIteration());
+
+  res_string.LoadString(IDS_SETTINGS_SHOW_POINT_NUMBERS);
+  m_show_point_numbers = m_property_grid.AddBoolItem(hs, res_string.GetString(), information.ShowPointNumbers());
   }
 
 void CSettingsDialog::_SetInformation()

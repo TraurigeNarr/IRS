@@ -209,6 +209,12 @@
     <ClInclude Include="FreeType.h">
       <Filter>Renderer\OpenGL</Filter>
     </ClInclude>
+    <ClInclude Include="MouseBrush.h">
+      <Filter>UI\Mice</Filter>
+    </ClInclude>
+    <ClInclude Include="VertexSet.h">
+      <Filter>Renderer\Renderable</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="MainFrm.cpp">
@@ -342,6 +348,12 @@
     </ClCompile>
     <ClCompile Include="FreeType.cpp">
       <Filter>Renderer\OpenGL</Filter>
+    </ClCompile>
+    <ClCompile Include="MouseBrush.cpp">
+      <Filter>UI\Mice</Filter>
+    </ClCompile>
+    <ClCompile Include="VertexSet.cpp">
+      <Filter>Renderer\Renderable</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

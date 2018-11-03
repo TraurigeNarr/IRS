@@ -23,6 +23,9 @@ public:
 
   void SetMouse(MouseType i_type);
   void MouseClicked(CView* ip_view, WPARAM wParam, LPARAM lParam);
+  virtual void MouseDown(CView* ip_view, int x, int y);
+  virtual void MouseUp(CView* ip_view, int x, int y);
+  virtual void Move(CView* ip_view, int x, int y);
   bool SetCursor(CWnd* pWnd, UINT nHitTest, UINT message);
 
   void EnableActiveMouse();
