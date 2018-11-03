@@ -89,19 +89,23 @@ void CSettingsDialog::_SetInformation()
   bool draw_decision = false, 
       draw_division = true;
   m_property_grid.GetItemValue(m_bool_draw_decision_functions, draw_decision);
-  m_property_grid.GetItemValue(m_bool_draw_division_functions, draw_division);
   information.SetDrawFunctions(draw_decision, draw_division);
   //logging
   bool log_on_each_iteration = true;
-  m_property_grid.GetItemValue(m_bool_draw_decision_functions, log_on_each_iteration);
+  m_property_grid.GetItemValue(m_log_on_each_iteration, log_on_each_iteration);
   information.SetLog(log_on_each_iteration);
+  // show point number
+  bool show_point_number = true;
+  m_property_grid.GetItemValue(m_show_point_numbers, show_point_number);
+  information.SetShowPointNumbers(show_point_number);
   }
 
 BOOL CSettingsDialog::OnInitDialog()
-  {
-  _Initialize();
-  return CDialogEx::OnInitDialog();;
-  }
+{
+	BOOL result = CDialogEx::OnInitDialog();
+	_Initialize();
+	return result;
+}
 
 void CSettingsDialog::DoDataExchange(CDataExchange* pDX)
   {
