@@ -22,7 +22,13 @@ namespace Algorithms
       ~Reporter();
 
       template <typename T>
-      void Report(const T& i_data);
+      bool Report(const T& i_data);
+
+	  template <typename... T>
+	  void ReportMultiple(const T&... data)
+	  {
+		  bool x[] = {Report<T>(data)...};
+	  }
 
       std::wstring GetState(const std::wstring& i_new_line_pattern = L"\n", const std::wstring& i_offset_pattern = L"  ", const std::wstring i_delimiter = L":") const;
       template <typename TStream>
@@ -35,12 +41,13 @@ namespace Algorithms
     };
 
     template <typename T>
-    void Reporter::Report(const T& i_data)
+    bool Reporter::Report(const T& i_data)
     {
       std::wstringstream stream;
       stream.precision(m_precision);
       stream << i_data;
       m_state += stream.str();
+	  return true;
     }
 
     template <typename TStream>
