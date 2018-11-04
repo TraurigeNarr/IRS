@@ -26,6 +26,9 @@ namespace IRS
     std::wofstream file(i_path, std::ios::out);
     if (!file.good())
       return false;
+	//set mode and flush it`s information
+	CMainFrame* pMainWnd = (CMainFrame *)AfxGetMainWnd();
+	file << "M:" << pMainWnd->GetController()->GetCurrentMode()->GetType() << std::endl;
 
     std::vector<ClassHandlerRenderer*> classes = IRS::DatabaseInstance->GetItems<ClassHandlerRenderer>();
     std::for_each(classes.begin(), classes.end(), [&file](ClassHandlerRenderer* ip_renderer)
@@ -56,10 +59,25 @@ namespace IRS
     //set mode and flush it`s information
     CMainFrame* pMainWnd = (CMainFrame *)AfxGetMainWnd();
 
-    if (file.peek() == 'c')
+	std::wstring buf;
+	buf.resize(255);
+	file.getline(&buf[0], buf.capacity());
+	if (buf[0] != 'M')
+	{
+		return false;
+	}
+
+	int mode = std::stoi(buf.substr(2));
+    if (mode == ModeType::MT_SIMPLE)
       pMainWnd->GetController()->SetMode(MT_SIMPLE);
-    else
+    else if (mode == ModeType::MT_CLUSTERING)
       pMainWnd->GetController()->SetMode(MT_CLUSTERING);
+	else if (mode == ModeType::MT_RECOGNITION)
+		pMainWnd->GetController()->SetMode(MT_RECOGNITION);
+	else
+	{
+		return false;
+	}
 
     ModeInformation& mode_info = pMainWnd->GetController()->GetCurrentMode()->GetInformation();
     //clear information and data base

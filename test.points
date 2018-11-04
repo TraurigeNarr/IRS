@@ -1,0 +1,19 @@
+M:1
+vertex;-8.59551;5.35581;0
+vertex;-8.05243;3.46442;0
+vertex;-7.1161;0.543071;0
+vertex;-4.3633;-3.18352;0
+vertex;2.3221;1.61049;0
+vertex;2.397;2.3221;0
+vertex;-3.16479;2.73408;0
+vertex;2.92135;-0.468165;0
+vertex;3.98876;-3.25843;0
+vertex;2.56554;1.89139;0
+vertex;4.00749;3.74532;0
+vertex;-1.62921;-1.25468;0
+vertex;-0.0749068;-3.82022;0
+vertex;-0.0749068;1.53558;0
+
+You can simply corrupt this file but aftermath will be on your conscience. 
+There was no aim to do this file encrypted and non-breakable.
+Regards

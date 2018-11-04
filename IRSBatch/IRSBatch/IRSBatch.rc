@@ -126,6 +126,13 @@ BEGIN
     PUSHBUTTON      "Reset all",IDC_SETTINGS_RESET_ALL,252,7,50,14
 END
 
+IDD_RECOGNITION_PAGE DIALOGEX 0, 0, 199, 271
+STYLE DS_SETFONT | DS_FIXEDSYS | WS_POPUP | WS_SYSMENU
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    PUSHBUTTON      "Recognize",IDC_RECOGNIZE_BUTTON,142,250,50,14
+END
+
 
 /////////////////////////////////////////////////////////////////////////////
 //
@@ -158,6 +165,15 @@ BEGIN
         RIGHTMARGIN, 302
         TOPMARGIN, 7
         BOTTOMMARGIN, 170
+    END
+
+    IDD_RECOGNITION_PAGE, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 192
+        VERTGUIDE, 192
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 264
     END
 END
 #endif    // APSTUDIO_INVOKED
@@ -197,6 +213,17 @@ BEGIN
     0
 END
 
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// AFX_DIALOG_LAYOUT
+//
+
+IDD_RECOGNITION_PAGE AFX_DIALOG_LAYOUT
+BEGIN
+    0
+END
+
 #endif    // Russian (Russia) resources
 /////////////////////////////////////////////////////////////////////////////
 
@@ -230,7 +257,7 @@ FONT 8, "MS Shell Dlg", 400, 0, 0x0
 BEGIN
     PUSHBUTTON      "Clear",IDC_CLEAR,160,9,43,13
     CONTROL         "",IDC_ITEMS_TREE,"SysTreeView32",TVS_HASBUTTONS | TVS_HASLINES | TVS_SHOWSELALWAYS | WS_BORDER | WS_HSCROLL | WS_TABSTOP,6,55,197,190
-    GROUPBOX        "Mode",IDC_STATIC,6,7,66,40
+    GROUPBOX        "Mode",IDC_STATIC,6,6,66,40
     CONTROL         "Etalon",IDC_CORE_POINT_MODE,"Button",BS_AUTORADIOBUTTON | WS_GROUP,12,19,36,10
     CONTROL         "Points",IDC_POINTS_MODE,"Button",BS_AUTORADIOBUTTON,12,31,35,10
     PUSHBUTTON      "Analyze",IDC_ANALYZE,160,27,43,13
@@ -283,7 +310,7 @@ BEGIN
     BEGIN
         LEFTMARGIN, 6
         RIGHTMARGIN, 203
-        TOPMARGIN, 7
+        TOPMARGIN, 6
         BOTTOMMARGIN, 245
     END
 
@@ -312,6 +339,17 @@ BEGIN
     END
 END
 #endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// AFX_DIALOG_LAYOUT
+//
+
+IDD_SIMPLE_DIALOG AFX_DIALOG_LAYOUT
+BEGIN
+    0
+END
 
 
 /////////////////////////////////////////////////////////////////////////////
@@ -364,6 +402,7 @@ BEGIN
     BEGIN
         MENUITEM "Simple mode",                 ID_MODE_SIMPLEMODE
         MENUITEM "Clustering",                  ID_MODE_CLUSTERING
+        MENUITEM "Recognition mode",            ID_MODE_RECOGNITIONMODE
     END
     POPUP "Settings"
     BEGIN
@@ -487,6 +526,7 @@ BEGIN
     IDS_SETTINGS_SHOW_POINT_NUMBERS "Show point numbers"
     IDS_SETTINGS_POINT_RADIUS "Point radius"
     IDS_VERTEXSET_NAME      "Vertex set %d"
+    IDS_RECOGNITION_MODE    "Recognition mode"
 END
 
 STRINGTABLE

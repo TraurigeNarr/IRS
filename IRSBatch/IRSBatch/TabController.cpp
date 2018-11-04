@@ -8,6 +8,8 @@
 #include "SimpleMode.h"
 #include "TabController.h"
 
+#include "RecognitionMode/RecognitionMode.h"
+
 #include <Algorithms/AlgorithmManager.h>
 #include <Algorithms/SimpleSpaceDivider.h>
 #include <Algorithms/ClusteringK_Means.h>
@@ -89,6 +91,9 @@ int CTabController::_InitializeModes()
   m_modes.push_back(p_mode);
 
   p_mode = new ClusteringMode(nullptr);
+  m_modes.push_back(p_mode);
+
+  p_mode = new RecognitionMode(nullptr);
   m_modes.push_back(p_mode);
 
   //initialize algorithms

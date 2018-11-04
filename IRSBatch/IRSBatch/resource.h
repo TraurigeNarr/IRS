@@ -49,6 +49,8 @@
 #define IDS_SETTINGS_SHOW_POINT_NUMBERS 135
 #define IDS_SETTINGS_POINT_RADIUS       136
 #define IDS_VERTEXSET_NAME              137
+#define IDS_STRING138                   138
+#define IDS_RECOGNITION_MODE            138
 #define ID_CURSOR_POINTS                318
 #define ID_CURSOR_CORE_POINT            320
 #define IDR_TOOLBAR1                    321
@@ -92,21 +94,24 @@
 #define IDC_ADD_CLASS                   1046
 #define IDC_SETTINGS_PROPERTIES         1048
 #define IDC_SETTINGS_RESET_ALL          1049
+#define IDC_RECOGNIZE_BUTTON            1050
 #define ID_MODE_SIMPLEMODE              32771
 #define ID_MODE_CLUSTERING              32772
 #define IDT_MAIN_TOOLBAR                32774
 #define ID_SETTINGS_MODEMOUSE           32775
 #define ID_SETTINGS_SELECTIONMOUSE      32776
-#define ID_SETTINGS_MOUSEBRUSH          32777
-#define ID_SETTINGS_SETTINGS            32778
+#define ID_MODE_RECOGNITIONMODE         32777
+#define ID_SETTINGS_MOUSEBRUSH          32778
+#define ID_SETTINGS_SETTINGS            32779
+#define IDD_RECOGNITION_PAGE            57665
 
 // Next default values for new objects
 // 
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
-#define _APS_NEXT_RESOURCE_VALUE        331
-#define _APS_NEXT_COMMAND_VALUE         32779
-#define _APS_NEXT_CONTROL_VALUE         1050
+#define _APS_NEXT_RESOURCE_VALUE        336
+#define _APS_NEXT_COMMAND_VALUE         32780
+#define _APS_NEXT_CONTROL_VALUE         1051
 #define _APS_NEXT_SYMED_VALUE           310
 #endif
 #endif

@@ -45,6 +45,9 @@
     <Filter Include="Renderer\OpenGL">
       <UniqueIdentifier>{c0b5b1d1-f84f-4123-8e8e-f9a7ce47b36b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="UI\Modes\RecognitionMode">
+      <UniqueIdentifier>{ea83dd7b-4315-439d-b2cc-74875eb937b0}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="IRSBatch.h">
@@ -215,6 +218,9 @@
     <ClInclude Include="VertexSet.h">
       <Filter>Renderer\Renderable</Filter>
     </ClInclude>
+    <ClInclude Include="RecognitionMode\RecognitionMode.h">
+      <Filter>UI\Modes\RecognitionMode</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="MainFrm.cpp">
@@ -354,6 +360,9 @@
     </ClCompile>
     <ClCompile Include="VertexSet.cpp">
       <Filter>Renderer\Renderable</Filter>
+    </ClCompile>
+    <ClCompile Include="RecognitionMode\RecognitionMode.cpp">
+      <Filter>UI\Modes\RecognitionMode</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

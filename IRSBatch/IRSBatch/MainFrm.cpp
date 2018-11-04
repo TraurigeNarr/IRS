@@ -29,7 +29,7 @@ BEGIN_MESSAGE_MAP(CMainFrame, CFrameWndEx)
 	ON_WM_CREATE()
 	ON_WM_SIZE()
 	ON_WM_GETMINMAXINFO()
-	ON_COMMAND_RANGE(ID_MODE_SIMPLEMODE, ID_MODE_CLUSTERING, &CMainFrame::OnModeSwitch)
+	ON_COMMAND_RANGE(ID_MODE_SIMPLEMODE, ID_MODE_RECOGNITIONMODE, &CMainFrame::OnModeSwitch)
 	ON_COMMAND_RANGE(ID_SETTINGS_MODEMOUSE, ID_SETTINGS_MOUSEBRUSH, &CMainFrame::OnMouseSwitch)
 	ON_COMMAND(ID_SETTINGS_SETTINGS, &CMainFrame::OnSettings)
 END_MESSAGE_MAP()
@@ -141,22 +141,25 @@ BOOL CMainFrame::PreCreateWindow(CREATESTRUCT& cs)
 
 void CMainFrame::OnModeSwitch(UINT i_id)
 {
-  ASSERT (mp_tab_controller);
-  if (!mp_tab_controller->IsVisible())
-    mp_tab_controller->ShowPane(TRUE, FALSE, TRUE);
+	ASSERT(mp_tab_controller);
+	if (!mp_tab_controller->IsVisible())
+		mp_tab_controller->ShowPane(TRUE, FALSE, TRUE);
 
-  switch(i_id)
-  {
-  case ID_MODE_SIMPLEMODE:
-    mp_tab_controller->SetMode(MT_SIMPLE);
-    break;
-  case ID_MODE_CLUSTERING:
-    mp_tab_controller->SetMode(MT_CLUSTERING);
-    break;
-  default:
-    ASSERT("WE SHOULD NOT BE HERE");
-    break;
-  }
+	switch (i_id)
+	{
+	case ID_MODE_SIMPLEMODE:
+		mp_tab_controller->SetMode(MT_SIMPLE);
+		break;
+	case ID_MODE_CLUSTERING:
+		mp_tab_controller->SetMode(MT_CLUSTERING);
+		break;
+	case ID_MODE_RECOGNITIONMODE:
+		mp_tab_controller->SetMode(MT_RECOGNITION);
+		break;
+	default:
+		ASSERT("WE SHOULD NOT BE HERE");
+		break;
+	}
 }
 
 void CMainFrame::OnMouseSwitch(UINT i_id)
