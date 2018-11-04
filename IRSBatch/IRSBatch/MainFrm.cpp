@@ -160,6 +160,7 @@ void CMainFrame::OnModeSwitch(UINT i_id)
 		ASSERT("WE SHOULD NOT BE HERE");
 		break;
 	}
+	mp_render_frame->Invalidate();
 }
 
 void CMainFrame::OnMouseSwitch(UINT i_id)

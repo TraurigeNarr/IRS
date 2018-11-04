@@ -36,6 +36,8 @@
 #include <memory>
 #include <vector>
 #include <wchar.h>
+#include <iterator>
+#include <algorithm>
 
 // Windows Header Files:
 #include <windows.h>
@@ -43,10 +45,3 @@
 
 //Math classes
 #include <MathBase/Types.h>
-
-
-
-
-
-
-

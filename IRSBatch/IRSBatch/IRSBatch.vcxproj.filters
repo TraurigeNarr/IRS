@@ -221,6 +221,9 @@
     <ClInclude Include="RecognitionMode\RecognitionMode.h">
       <Filter>UI\Modes\RecognitionMode</Filter>
     </ClInclude>
+    <ClInclude Include="RecognitionMode\RecognitionPage.h">
+      <Filter>UI\Modes\RecognitionMode</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="MainFrm.cpp">
@@ -362,6 +365,9 @@
       <Filter>Renderer\Renderable</Filter>
     </ClCompile>
     <ClCompile Include="RecognitionMode\RecognitionMode.cpp">
+      <Filter>UI\Modes\RecognitionMode</Filter>
+    </ClCompile>
+    <ClCompile Include="RecognitionMode\RecognitionPage.cpp">
       <Filter>UI\Modes\RecognitionMode</Filter>
     </ClCompile>
   </ItemGroup>

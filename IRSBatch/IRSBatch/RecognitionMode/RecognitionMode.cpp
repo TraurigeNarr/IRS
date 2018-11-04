@@ -22,7 +22,7 @@
 
 RecognitionMode::RecognitionMode(CWnd* pParent /*= NULL*/)
 	: IMode(MT_RECOGNITION)
-	//, m_algo_page(this, pParent)
+	, m_algo_page(this, pParent)
 	, m_points_page(this, pParent)
 	, m_results_page(std::make_shared<Algorithms::Reporters::Reporter>(), this, pParent)
 {
@@ -55,12 +55,12 @@ int RecognitionMode::InitializeMode(CMFCTabCtrl* ip_tab_ctrl)
 	ASSERT(bNameValid);
 	ip_tab_ctrl->AddTab(&m_points_page, strTabName, (UINT)0);
 	//algorithms page
-	//m_algo_page.DestroyWindow();
-	//if (!m_algo_page.Create(ClusteringAlgoPage::IDD, ip_tab_ctrl) || !m_algo_page.ModifyStyleEx(0, dwStyle))
-	//	return FALSE;
-	//bNameValid = strTabName.LoadString(IDS_CLUSTERING_ALGO_PAGE);
-	//ASSERT(bNameValid);
-	//ip_tab_ctrl->AddTab(&m_algo_page, strTabName, (UINT)1);
+	m_algo_page.DestroyWindow();
+	if (!m_algo_page.Create(RecognitionPage::IDD, ip_tab_ctrl) || !m_algo_page.ModifyStyleEx(0, dwStyle))
+		return FALSE;
+	bNameValid = strTabName.LoadString(IDS_CLUSTERING_ALGO_PAGE);
+	ASSERT(bNameValid);
+	ip_tab_ctrl->AddTab(&m_algo_page, strTabName, (UINT)1);
 	//results page
 	m_results_page.DestroyWindow();
 	if (!m_results_page.Create(Results_Page::IDD, ip_tab_ctrl) || !m_results_page.ModifyStyleEx(0, dwStyle))
@@ -74,12 +74,13 @@ int RecognitionMode::InitializeMode(CMFCTabCtrl* ip_tab_ctrl)
 	//start listen to notifications
 	StartListen();
 	MouseControllerInstance->SetMouse(MOUSE_BRUSH);
-	//m_algo_page.SetReporter(m_results_page.GetReporter());
+	m_algo_page.SetReporter(m_results_page.GetReporter());
 	ModeInformation& mode_info = GetInformation();
 	AlgorithmsInstance->SetNameGenerator(std::bind<std::wstring>(&ModeInformation::GetNextClusterName, std::ref(mode_info)));
 	mode_info.SetCurrentMouse(MOUSE_BRUSH);
 	mode_info.SetPointRadius(3.0f);
 	mode_info.SetShowPointNumbers(false);
+	mode_info.SetGridDivisionsNumber(2u);
 
 	//set grid scale
 	Grid* p_grid = IRS::DatabaseInstance->GetGrid();

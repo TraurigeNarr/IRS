@@ -13,6 +13,9 @@
     <Filter Include="Algorithms\Clustering">
       <UniqueIdentifier>{56f68af3-db27-4e25-8842-bb8ac68924da}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Algorithms\Recognition">
+      <UniqueIdentifier>{c737a669-52d3-40dc-a520-da02b234af5e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="targetver.h">
@@ -48,6 +51,12 @@
     <ClInclude Include="Reporter.h">
       <Filter>Base</Filter>
     </ClInclude>
+    <ClInclude Include="Recognition\Recognition_KNN.h">
+      <Filter>Algorithms\Recognition</Filter>
+    </ClInclude>
+    <ClInclude Include="Recognition\RecognitionParameters.h">
+      <Filter>Algorithms\Recognition</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -76,6 +85,9 @@
     </ClCompile>
     <ClCompile Include="Reporter.cpp">
       <Filter>Base</Filter>
+    </ClCompile>
+    <ClCompile Include="Recognition\Recognition_KNN.cpp">
+      <Filter>Algorithms\Recognition</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

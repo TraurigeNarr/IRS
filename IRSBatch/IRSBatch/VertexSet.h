@@ -28,4 +28,7 @@ public:
 	size_t GetIndex() const {
 		return m_index;
 	}
+	const std::vector<Vertex>& GetVertices() const {
+		return m_vertices;
+	}
 };

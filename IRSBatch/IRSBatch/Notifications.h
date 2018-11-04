@@ -6,7 +6,9 @@
 class INotificationData
 {
 public:
-  virtual ~INotificationData(){}
+  virtual ~INotificationData()
+  {
+  }
 };
 
 class Vertex;
@@ -77,7 +79,6 @@ class DatabaseCleared : public INotificationData
 
 class ClusteringSucceeded : public INotificationData
 {
-
 };
 
 class ItemSelectionChange : public INotificationData
@@ -98,6 +99,10 @@ public:
   {
 
   }
+};
+
+class RecognitionSucceded : public INotificationData
+{
 };
 
 //////////////////////////////////////////////////////////////////////////

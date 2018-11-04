@@ -2,7 +2,7 @@
 
 #include "IMode.h"
 
-#include "ClusteringAlgoPage.h"
+#include "RecognitionPage.h"
 #include "ResultsPage.h"
 #include "PointsPage.h"
 
@@ -24,12 +24,12 @@ private:
 	size_t m_number_of_clusters;
 	size_t m_iteration_number;
 
-	//ClusteringAlgoPage  m_algo_page;
+	RecognitionPage     m_algo_page;
 	PointsPage          m_points_page;
 	Results_Page        m_results_page;
 
 private:
-	void _SetParameters(Algorithms::Clustering_Parameters* op_parameters);
+	void _SetParameters(Algorithms::Recognition_Parameters* op_parameters);
 
 public:
 	RecognitionMode(CWnd* ip_parent = NULL);
