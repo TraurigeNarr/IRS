@@ -13,9 +13,113 @@
 
 namespace Algorithms
 {
-	static constexpr int MIN_CONTOUR_AREA = 5;
+	static constexpr int MIN_CONTOUR_AREA = 50;
 	static constexpr int RESIZED_IMAGE_WIDTH = 20;
 	static constexpr int RESIZED_IMAGE_HEIGHT = 30;
+
+
+	void TrainOnImage(cv::Mat& matTrainingImagesAsFlattenedFloats, const std::string& im_path, int sym)
+	{
+		cv::Mat imgTrainingNumbers;         // input image
+		cv::Mat imgGrayscale;               // 
+		cv::Mat imgBlurred;                 // declare various images
+		cv::Mat imgThresh;                  //
+		cv::Mat imgThreshCopy;              //
+
+		std::vector<std::vector<cv::Point> > ptContours;        // declare contours vector
+		std::vector<cv::Vec4i> v4iHierarchy;                    // declare contours hierarchy
+
+		cv::Mat matClassificationInts;      // these are our training classifications, note we will have to perform some conversions before writing to file later
+
+		// possible chars we are interested in are digits 0 through 9 and capital letters A through Z, put these in vector intValidChars
+		std::vector<int> intValidChars = { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9',
+			'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J',
+			'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T',
+			'U', 'V', 'W', 'X', 'Y', 'Z' };
+
+		imgTrainingNumbers = cv::imread(im_path);          // read in training numbers image
+
+		if (imgTrainingNumbers.empty()) {                               // if unable to open image
+			std::cout << "error: image not read from file\n\n";         // show error message on command line
+			return;                                                  // and exit program
+		}
+
+		cv::cvtColor(imgTrainingNumbers, imgGrayscale, CV_BGR2GRAY);        // convert to grayscale
+
+		cv::GaussianBlur(imgGrayscale,              // input image
+						 imgBlurred,                             // output image
+						 cv::Size(5, 5),                         // smoothing window width and height in pixels
+						 0);                                     // sigma value, determines how much the image will be blurred, zero makes function choose the sigma value
+
+																 // filter image from grayscale to black and white
+		cv::adaptiveThreshold(imgBlurred,           // input image
+							  imgThresh,                              // output image
+							  255,                                    // make pixels that pass the threshold full white
+							  cv::ADAPTIVE_THRESH_GAUSSIAN_C,         // use gaussian rather than mean, seems to give better results
+							  cv::THRESH_BINARY_INV,                  // invert so foreground will be white, background will be black
+							  11,                                     // size of a pixel neighborhood used to calculate threshold value
+							  2);                                     // constant subtracted from the mean or weighted mean
+
+		cv::imshow("imgThresh", imgThresh);         // show threshold image for reference
+
+		imgThreshCopy = imgThresh.clone();          // make a copy of the thresh image, this in necessary b/c findContours modifies the image
+
+		cv::findContours(imgThreshCopy,             // input image, make sure to use a copy since the function will modify this image in the course of finding contours
+						 ptContours,                             // output contours
+						 v4iHierarchy,                           // output hierarchy
+						 cv::RETR_EXTERNAL,                      // retrieve the outermost contours only
+						 cv::CHAIN_APPROX_SIMPLE);               // compress horizontal, vertical, and diagonal segments and leave only their end points
+
+		for (int i = 0; i < ptContours.size(); i++) {                           // for each contour
+			if (cv::contourArea(ptContours[i]) > MIN_CONTOUR_AREA) {                // if contour is big enough to consider
+				cv::Rect boundingRect = cv::boundingRect(ptContours[i]);                // get the bounding rect
+
+				cv::rectangle(imgTrainingNumbers, boundingRect, cv::Scalar(0, 0, 255), 2);      // draw red rectangle around each contour as we ask user for input
+
+				cv::Mat matROI = imgThresh(boundingRect);           // get ROI image of bounding rect
+
+				cv::Mat matROIResized;
+				cv::resize(matROI, matROIResized, cv::Size(RESIZED_IMAGE_WIDTH, RESIZED_IMAGE_HEIGHT));     // resize image, this will be more consistent for recognition and storage
+
+				cv::imshow("matROI", matROI);                               // show ROI image for reference
+				cv::imshow("matROIResized", matROIResized);                 // show resized ROI image for reference
+				cv::imshow("imgTrainingNumbers", imgTrainingNumbers);       // show training numbers image, this will now have red rectangles drawn on it
+
+
+
+				int intChar = sym;
+				if (std::find(intValidChars.begin(), intValidChars.end(), intChar) != intValidChars.end()) {     // else if the char is in the list of chars we are looking for . . .
+
+					matClassificationInts.push_back(intChar);       // append classification char to integer list of chars
+
+					cv::Mat matImageFloat;                          // now add the training image (some conversion is necessary first) . . .
+					matROIResized.convertTo(matImageFloat, CV_32FC1);       // convert Mat to float
+
+					cv::Mat matImageFlattenedFloat = matImageFloat.reshape(1, 1);       // flatten
+
+					matTrainingImagesAsFlattenedFloats.push_back(matImageFlattenedFloat);       // add to Mat as though it was a vector, this is necessary due to the
+																								// data types that KNearest.train accepts
+				}   // end if
+			}   // end if
+		}   // end for
+	}
+
+
+	void Train()
+	{
+		std::string path_to_data = "G:/Development/Neural/input/A_Z_Handwritten_Data/output/";
+
+		// these are our training images, due to the data types that the KNN object KNearest requires, we have to declare a single Mat,
+		// then append to it as though it's a vector, also we will have to perform some conversions before writing to file later
+		cv::Mat matTrainingImagesAsFlattenedFloats;
+
+		for (int sym = 'A'; sym <= 'Z'; ++sym)
+		{
+			
+			//TrainOnImage(matTrainingImagesAsFlattenedFloats, path_to_data + std::string(char(sym)), sym);
+		}
+	}
+
 
 	Recognition_KNN::Recognition_KNN(const std::wstring i_analyzer_name, int i_available_int)
 		: IAnalyzer<Recognition_Parameters>(i_analyzer_name)
@@ -34,6 +138,11 @@ namespace Algorithms
 		return i_mode == m_mode;
 	}
 
+	bool point_in_rect(const cv::Rect& rect, cv::Point2i pt)
+	{
+		return rect.x <= pt.x && pt.x <= rect.x + rect.width && rect.y <= pt.y && pt.y <= rect.y + rect.height;
+	}
+
 	class ContourWithData {
 	public:
 		// member variables ///////////////////////////////////////////////////////////////////////////
@@ -41,10 +150,23 @@ namespace Algorithms
 		cv::Rect boundingRect;                      // bounding rect for contour
 		float fltArea;                              // area of contour
 
-													///////////////////////////////////////////////////////////////////////////////////////////////
-		bool checkIfContourIsValid() {                              // obviously in a production grade program
-			if (fltArea < MIN_CONTOUR_AREA) return false;           // we would have a much more robust function for 
-			return true;                                            // identifying if a contour is valid !!
+		
+
+		///////////////////////////////////////////////////////////////////////////////////////////////
+		bool checkIfContourIsValid(std::vector<ContourWithData>& contours) {                              // obviously in a production grade program
+			const cv::Point2i br = boundingRect.br();
+			const cv::Point2i tl = boundingRect.tl();
+
+			for (auto& contour : contours)
+			{
+				if (&contour == this)
+					continue;
+				bool br_contains = contour.boundingRect.contains(br);
+				bool tl_contains = contour.boundingRect.contains(tl);
+				if (point_in_rect(contour.boundingRect, br) && point_in_rect(contour.boundingRect, tl))
+					return false;
+			}
+			return true;
 		}
 
 		///////////////////////////////////////////////////////////////////////////////////////////////
@@ -171,7 +293,7 @@ namespace Algorithms
 		}
 
 		for (int i = 0; i < allContoursWithData.size(); i++) {                      // for all contours
-			if (allContoursWithData[i].checkIfContourIsValid()) {                   // check if valid
+			if (allContoursWithData[i].checkIfContourIsValid(allContoursWithData)) {                   // check if valid
 				validContoursWithData.push_back(allContoursWithData[i]);            // if so, append to valid contour list
 			}
 		}
@@ -180,12 +302,22 @@ namespace Algorithms
 
 		std::string strFinalString;         // declare final string, this will have the final number sequence by the end of the program
 
+		cv::Scalar colors[7] = {
+			cv::Scalar(255, 0, 0),
+			cv::Scalar(0, 255, 0),
+			cv::Scalar(0, 0, 255),
+			cv::Scalar(255, 255, 0),
+			cv::Scalar(255, 0, 255),
+			cv::Scalar(0, 255, 255),
+			cv::Scalar(255, 255, 255),
+		};
+
 		for (int i = 0; i < validContoursWithData.size(); i++) {            // for each contour
 
 																			// draw a green rect around the current char
 			cv::rectangle(matTestingNumbers,                            // draw rectangle on original image
 						  validContoursWithData[i].boundingRect,        // rect to draw
-						  cv::Scalar(0, 255, 0),                        // green
+						  colors[i%6],                        // green
 						  2);                                           // thickness
 
 			cv::Mat matROI = matThresh(validContoursWithData[i].boundingRect);          // get ROI image of bounding rect
@@ -207,13 +339,14 @@ namespace Algorithms
 			strFinalString = strFinalString + char(int(fltCurrentChar));        // append current char to full string
 		}
 
-		cv::imshow("matTestingNumbers", matTestingNumbers);     // show input image with green boxes drawn around found digits
-
 		if (i_reporter)
 		{
 			i_reporter->Report(L"Symbols: ");
 			i_reporter->Report(strFinalString.c_str());
 		}
+
+		cv::imshow("matTestingNumbers", matTestingNumbers);     // show input image with green boxes drawn around found digits
+		cv::waitKey(0);
 
 		return true;
 	}
