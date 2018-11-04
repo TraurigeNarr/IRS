@@ -14,13 +14,14 @@
 #include "IRenderer.h"
 
 
-Vertex::Vertex (const Vector3D& i_point, size_t i_index)
-  : m_scale_factor(1.f)
-  , Vector3D(i_point)
-  , m_index(i_index)
-  , m_color(Color(0,0,255,255).m_color)
-  {
-  }
+Vertex::Vertex(const Vector3D& i_point, size_t i_index, bool true_coords)
+	: m_scale_factor(1.f)
+	, Vector3D(i_point)
+	, m_index(i_index)
+	, m_color(Color(0, 0, 255, 255).m_color)
+	, m_true_coords(true_coords)
+{
+}
 
 Vertex::~Vertex()
 {

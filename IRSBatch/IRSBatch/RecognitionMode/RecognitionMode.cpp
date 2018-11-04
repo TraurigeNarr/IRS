@@ -78,14 +78,17 @@ int RecognitionMode::InitializeMode(CMFCTabCtrl* ip_tab_ctrl)
 	ModeInformation& mode_info = GetInformation();
 	AlgorithmsInstance->SetNameGenerator(std::bind<std::wstring>(&ModeInformation::GetNextClusterName, std::ref(mode_info)));
 	mode_info.SetCurrentMouse(MOUSE_BRUSH);
-	mode_info.SetPointRadius(3.0f);
+	mode_info.SetPointRadius(1.0f);
 	mode_info.SetShowPointNumbers(false);
 	mode_info.SetGridDivisionsNumber(2u);
+	double scale[2] = { 0.0, 10.0 };
+	mode_info.SetGridScale(scale);
 
 	//set grid scale
 	Grid* p_grid = IRS::DatabaseInstance->GetGrid();
 	p_grid->SetMaxMin_X_Axis(GetInformation().GetGridXScaleMin(), GetInformation().GetGridXScaleMax());
 	p_grid->SetDivisionsNumber(GetInformation().GetGridDivisionsNumber());
+	HandleSettingsUpdate();
 	return TRUE;
 }
 

@@ -79,7 +79,7 @@ void MouseBrush::TryAddPoint(CView* ip_view, int x, int y)
 		return;
 
 	int change = std::abs(x - m_prev_x) + std::abs(y - m_prev_y);
-	if (change < 2)
+	if (change < 1)
 		return;
 
 	m_prev_x = x;
@@ -87,8 +87,15 @@ void MouseBrush::TryAddPoint(CView* ip_view, int x, int y)
 
 	CMainFrame* pMainWnd = (CMainFrame *)AfxGetMainWnd();
 	ModeInformation& mode_info = pMainWnd->GetController()->GetCurrentMode()->GetInformation();
-
-	mp_current_set->AddVertex(Vertex(IRS::DatabaseInstance->GetGrid()->GetPoint(x, y), mode_info.GetNextPointIndex()));
+	
+	const int brush_size = 3;
+	for (int i = -brush_size; i <= brush_size; ++i)
+	{
+		for (int j = -brush_size; j <= brush_size; ++j)
+		{
+			mp_current_set->AddVertex(Vertex(IRS::DatabaseInstance->GetGrid()->GetPoint(x + i, y + j), mode_info.GetNextPointIndex()));
+		}
+	}
 
 	render_frame->Invalidate();
 }

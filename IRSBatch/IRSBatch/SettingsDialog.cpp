@@ -79,11 +79,10 @@ void CSettingsDialog::_SetInformation()
 		Vector3D vec = temp->GetPosition();
 		Grid* p_grid = IRS::DatabaseInstance->GetGrid();
 		double scale[] = { vec.GetX(), vec.GetY() };
-		if (scale[0] < 0 && scale[1] > 0)
-		{
-			information.SetGridScale(scale);
-			p_grid->SetMaxMin_X_Axis(scale[0], scale[1]);
-		}
+		if (scale[0] > scale[1])
+			std::swap(scale[0], scale[1]);
+		information.SetGridScale(scale);
+		p_grid->SetMaxMin_X_Axis(scale[0], scale[1]);
 	}
 	size_t grid_divisions = 10;
 	m_property_grid.GetItemValue(m_grid_divisions_number, (int&)grid_divisions);

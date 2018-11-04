@@ -14,9 +14,10 @@ class Vertex
   float                   m_scale_factor;
   size_t                  m_index;
   int                     m_color;
+  bool                    m_true_coords = false;
 
 public:
-  Vertex (const Vector3D& i_point, size_t i_index);
+  Vertex (const Vector3D& i_point, size_t i_index, bool true_coords = false);
   ~Vertex ();
 
   //set scale factor

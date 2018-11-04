@@ -11,6 +11,7 @@
 #include "Vertex.h"
 #include "VertexSet.h"
 #include "ResultsPage.h"
+#include "Grid.h"
 
 #include <Algorithms/AlgorithmManager.h>
 #include <Algorithms/Recognition/Recognition_KNN.h>
@@ -89,7 +90,11 @@ void RecognitionPage::OnAnalyze()
 	for (VertexSet* vertex_set : IRS::DatabaseInstance->GetItems<VertexSet>())
 	{
 		auto& vertices = vertex_set->GetVertices();
-		std::copy(vertices.begin(), vertices.end(), std::back_inserter(params.m_points));
+		for (const Vertex& v : vertices)
+		{
+			D2D1_POINT_2F coordinates = IRS::DatabaseInstance->GetGrid()->TransformToRendererCoords(v);
+			params.m_points.push_back(Vector3D(coordinates.x, coordinates.y, 0.0));
+		}
 	}
 
 	mh_reporter->Flush();
