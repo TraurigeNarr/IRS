@@ -24,6 +24,8 @@ private:
 	size_t m_number_of_clusters;
 	size_t m_iteration_number;
 
+	CMFCTabCtrl*        m_tab_control;
+
 	RecognitionPage     m_algo_page;
 	PointsPage          m_points_page;
 	Results_Page        m_results_page;

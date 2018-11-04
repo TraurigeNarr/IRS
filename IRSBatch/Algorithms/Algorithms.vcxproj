@@ -213,7 +213,7 @@
     </Link>
     <Lib>
       <AdditionalDependencies>opencv_world343d.lib</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(SolutionDir)..\Binaries\$((PlatformTarget)\$(Configuration)\;$(THIRD_PARTIES)\opencv\build_new\lib\Debug;F:\ThirdParty\opencv\build_new\lib\Debug</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(SolutionDir)..\Binaries\$((PlatformTarget)\$(Configuration)\;F:\ThirdParty\opencv\build_new\lib\Debug</AdditionalLibraryDirectories>
     </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='DebugStatic|x64'">
@@ -299,9 +299,8 @@
       <OptimizeReferences>true</OptimizeReferences>
     </Link>
     <Lib>
-      <AdditionalDependencies>
-      </AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(SolutionDir)..\Binaries\$((PlatformTarget)\$(Configuration)\;$(THIRD_PARTIES)\opencv\build_new\lib\$(Configuration)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>opencv_world343.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)..\Binaries\$((PlatformTarget)\$(Configuration)\;$(THIRD_PARTIES)\opencv\build_new\lib\Release;F:\ThirdParty\opencv\build_new\lib\Release</AdditionalLibraryDirectories>
     </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='ReleaseStatic|x64'">

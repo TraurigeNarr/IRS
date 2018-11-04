@@ -25,6 +25,7 @@ RecognitionMode::RecognitionMode(CWnd* pParent /*= NULL*/)
 	, m_algo_page(this, pParent)
 	, m_points_page(this, pParent)
 	, m_results_page(std::make_shared<Algorithms::Reporters::Reporter>(), this, pParent)
+	, m_tab_control(nullptr)
 {
 	NotificationManager::GetInstance()->RegisterHandler(this);
 }
@@ -37,6 +38,7 @@ RecognitionMode::~RecognitionMode()
 
 int RecognitionMode::InitializeMode(CMFCTabCtrl* ip_tab_ctrl)
 {
+	m_tab_control = ip_tab_ctrl;
 	ASSERT(ip_tab_ctrl != nullptr);
 	CRect rectDummy;
 	CString strTabName;
@@ -117,13 +119,10 @@ void RecognitionMode::UpdateModeState()
 
 void RecognitionMode::HandleNotification(INotificationData* ip_data)
 {
-	if (ItemChanged* p_notification = dynamic_cast<ItemChanged*>(ip_data))
+	if (RecognitionSucceded* p_notification = dynamic_cast<RecognitionSucceded*>(ip_data))
 	{
-
+		if (m_tab_control != nullptr) {
+			m_tab_control->SetActiveTab(2);
+		}
 	}
-	else if (dynamic_cast<DatabaseCleared*>(ip_data) != nullptr)
-		m_points_page.DeleteAllItems();
-	else if (dynamic_cast<ClusteringSucceeded*>(ip_data) != nullptr)
-		m_points_page.FullUpdate();
-
 }
