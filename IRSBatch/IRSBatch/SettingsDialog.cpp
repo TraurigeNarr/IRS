@@ -62,43 +62,50 @@ void CSettingsDialog::_Initialize()
 
   res_string.LoadString(IDS_SETTINGS_SHOW_POINT_NUMBERS);
   m_show_point_numbers = m_property_grid.AddBoolItem(hs, res_string.GetString(), information.ShowPointNumbers());
+
+  res_string.LoadString(IDS_SETTINGS_POINT_RADIUS);
+  m_point_radius = m_property_grid.AddDoubleItem(hs, res_string.GetString(), information.PointRadius());
   }
 
 void CSettingsDialog::_SetInformation()
-  {
-  ModeInformation& information = mp_owner->GetInformation();
+{
+	ModeInformation& information = mp_owner->GetInformation();
 
-  //grid scale
-  CPointItem* temp = nullptr;
-  m_property_grid.GetItemValue<CPointItem>(m_grid_scale, temp);
-  if (nullptr != temp)
-    {
-    Vector3D vec = temp->GetPosition();
-    Grid* p_grid = IRS::DatabaseInstance->GetGrid();
-    double scale[] = { vec.GetX(), vec.GetY() };
-    if (scale[0] < 0 && scale[1] > 0)
-      {
-      information.SetGridScale(scale);
-      p_grid->SetMaxMin_X_Axis(scale[0], scale[1]);
-      }
-    }
-  size_t grid_divisions = 10;
-  m_property_grid.GetItemValue(m_grid_divisions_number, (int&)grid_divisions);
-  information.SetGridDivisionsNumber(grid_divisions);
-  //division functions
-  bool draw_decision = false, 
-      draw_division = true;
-  m_property_grid.GetItemValue(m_bool_draw_decision_functions, draw_decision);
-  information.SetDrawFunctions(draw_decision, draw_division);
-  //logging
-  bool log_on_each_iteration = true;
-  m_property_grid.GetItemValue(m_log_on_each_iteration, log_on_each_iteration);
-  information.SetLog(log_on_each_iteration);
-  // show point number
-  bool show_point_number = true;
-  m_property_grid.GetItemValue(m_show_point_numbers, show_point_number);
-  information.SetShowPointNumbers(show_point_number);
-  }
+	//grid scale
+	CPointItem* temp = nullptr;
+	m_property_grid.GetItemValue<CPointItem>(m_grid_scale, temp);
+	if (nullptr != temp)
+	{
+		Vector3D vec = temp->GetPosition();
+		Grid* p_grid = IRS::DatabaseInstance->GetGrid();
+		double scale[] = { vec.GetX(), vec.GetY() };
+		if (scale[0] < 0 && scale[1] > 0)
+		{
+			information.SetGridScale(scale);
+			p_grid->SetMaxMin_X_Axis(scale[0], scale[1]);
+		}
+	}
+	size_t grid_divisions = 10;
+	m_property_grid.GetItemValue(m_grid_divisions_number, (int&)grid_divisions);
+	information.SetGridDivisionsNumber(grid_divisions);
+	//division functions
+	bool draw_decision = false,
+		draw_division = true;
+	m_property_grid.GetItemValue(m_bool_draw_decision_functions, draw_decision);
+	information.SetDrawFunctions(draw_decision, draw_division);
+	//logging
+	bool log_on_each_iteration = true;
+	m_property_grid.GetItemValue(m_log_on_each_iteration, log_on_each_iteration);
+	information.SetLog(log_on_each_iteration);
+	// show point number
+	bool show_point_number = true;
+	m_property_grid.GetItemValue(m_show_point_numbers, show_point_number);
+	information.SetShowPointNumbers(show_point_number);
+	// point radius
+	double point_radius = 7.0f;
+	m_property_grid.GetItemValue(m_point_radius, point_radius);
+	information.SetPointRadius(static_cast<float>(point_radius));
+}
 
 BOOL CSettingsDialog::OnInitDialog()
 {

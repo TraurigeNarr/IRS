@@ -15,6 +15,7 @@ private:
   bool          m_log_on_each_iteration;
   bool			m_show_point_numbers;
   double        m_grid_x_scale[2];
+  float         m_point_radius;
   size_t        m_grid_divisions_number;
 
 protected:
@@ -38,6 +39,7 @@ public:
   void            SetLog(bool i_log_on_each_iteration);
   void            SetGridDivisionsNumber(size_t i_number);
   void            SetShowPointNumbers(bool i_show_point_numbers);
+  void            SetPointRadius(float i_radius);
 
   double          GetGridXScaleMin() const;
   double          GetGridXScaleMax() const;
@@ -45,5 +47,6 @@ public:
   bool            DrawDivisionFunctions() const;
   bool            LogOnEachIteration() const;
   bool            ShowPointNumbers() const;
+  float           PointRadius() const;
   size_t          GetGridDivisionsNumber() const;
 };

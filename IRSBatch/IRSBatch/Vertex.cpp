@@ -42,28 +42,30 @@ size_t Vertex::GetIndex() const
 }
 
 void Vertex::Draw(IRenderer* ip_renderer) const
-  {
-  D2D1_POINT_2F coordinates = IRS::DatabaseInstance->GetGrid()->TransformToRendererCoords(*this);
+{
+	CMainFrame* pMainWnd = (CMainFrame *)AfxGetMainWnd();
+	ModeInformation& mode_info = pMainWnd->GetController()->GetCurrentMode()->GetInformation();
 
-  if (IsSelected())
-    {
-    ip_renderer->RenderCircle(Vector3D(coordinates.x, coordinates.y, 0.), 7, Color(m_color));
-    }
-  else
-    {
-    ip_renderer->RenderRectangle(Vector3D(coordinates.x, coordinates.y, 0.), 10, 10, Color(m_color));
-    }
+	D2D1_POINT_2F coordinates = IRS::DatabaseInstance->GetGrid()->TransformToRendererCoords(*this);
 
-  //draw index of vertex
-  CMainFrame* pMainWnd = (CMainFrame *)AfxGetMainWnd();
-  ModeInformation& mode_info = pMainWnd->GetController()->GetCurrentMode()->GetInformation();
-  if (mode_info.ShowPointNumbers())
-  {
-	  char text[10];
-	  sprintf_s(text, "%d", GetIndex());
-	  ip_renderer->RenderText(Vector3D(coordinates.x + 3, coordinates.y - 5, 0.), text, IRS::CL_BLACK);
-  }
-  }
+	const double radius = static_cast<double>(mode_info.PointRadius());
+	if (IsSelected())
+	{
+		ip_renderer->RenderCircle(Vector3D(coordinates.x, coordinates.y, 0.), radius*1.5, Color(m_color));
+	}
+	else
+	{
+		ip_renderer->RenderRectangle(Vector3D(coordinates.x, coordinates.y, 0.), radius, radius, Color(m_color));
+	}
+
+	//draw index of vertex
+	if (mode_info.ShowPointNumbers())
+	{
+		char text[10];
+		sprintf_s(text, "%d", GetIndex());
+		ip_renderer->RenderText(Vector3D(coordinates.x + 3, coordinates.y - 5, 0.), text, IRS::CL_BLACK);
+	}
+}
 
 Vector3D Vertex::GetPosition() const
 {

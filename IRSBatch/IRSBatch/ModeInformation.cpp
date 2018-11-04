@@ -136,7 +136,8 @@ void ModeInformation::Flush()
 	m_draw_class_division_functions = true;
 	m_draw_class_decision_functions = false;
 	m_log_on_each_iteration = true;
-	m_show_point_numbers = false;
+	m_show_point_numbers = true;
+	m_point_radius = 7.0f;
 }
 
 void ModeInformation::SetCorePointNameTemplate(const std::wstring& i_template)
@@ -248,4 +249,14 @@ void ModeInformation::SetShowPointNumbers(bool i_show_point_numbers)
 bool ModeInformation::ShowPointNumbers() const
 {
 	return m_show_point_numbers;
+}
+
+void ModeInformation::SetPointRadius(float i_point_radius)
+{
+	m_point_radius = i_point_radius;
+}
+
+float ModeInformation::PointRadius() const
+{
+	return m_point_radius;
 }

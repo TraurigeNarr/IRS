@@ -17,6 +17,7 @@ class CSettingsDialog : public CDialogEx
 
     HITEM m_grid_scale;
     HITEM m_grid_divisions_number;
+	HITEM m_point_radius;
     ICustomItem* mp_grid_scale_custom_item;
 
     HITEM m_log_on_each_iteration;
