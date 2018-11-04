@@ -38,6 +38,7 @@ BEGIN_MESSAGE_MAP(RecognitionPage, CDialogEx)
 	ON_WM_CREATE()
 	ON_WM_SIZE()
 	ON_COMMAND(IDC_RECOGNIZE_BUTTON, OnAnalyze)
+	ON_COMMAND(IDC_TRAIN_BUTTON, OnTrain)
 END_MESSAGE_MAP()
 
 //////////////////////////////////////////////////////////////////////////
@@ -63,7 +64,21 @@ BOOL RecognitionPage::OnInitDialog()
 	m_algo_combobox = m_property_grid.AddComboItem(hs, res_string.GetString(),
 												   AlgorithmsInstance->GetAnalyzerNames(mp_owner->GetType()),
 												   0);
+	
+	res_string.LoadString(IDS_SHOW_RECOGNITION_CONTOURS);
+	m_show_recognition_contours = m_property_grid.AddBoolItem(hs, res_string.GetString(), false);
 
+	res_string.LoadString(IDS_MAX_SAMPLES_NUMBER);
+	m_max_samples_per_symbol = m_property_grid.AddIntegerItem(hs, res_string.GetString(), 1000);
+
+	res_string.LoadString(IDS_PATH_TO_TRAIN_FOLDER);
+	m_path_to_train_folder = m_property_grid.AddStringItem(hs, res_string.GetString(), L"");
+
+	res_string.LoadString(IDS_CLASSIFICATION_FILE);
+	m_classification_file = m_property_grid.AddStringItem(hs, res_string.GetString(), L"classifications.xml");
+
+	res_string.LoadString(IDS_IMAGES_FILE);
+	m_images_file = m_property_grid.AddStringItem(hs, res_string.GetString(), L"images.xml");
 	return TRUE;
 }
 
@@ -85,7 +100,6 @@ void RecognitionPage::OnAnalyze()
 	Algorithms::Recognition_Parameters params;
 	if (!_SetParameters(&params))
 		return;
-
 
 	for (VertexSet* vertex_set : IRS::DatabaseInstance->GetItems<VertexSet>())
 	{
@@ -109,9 +123,34 @@ void RecognitionPage::OnAnalyze()
 	NotificationManager::GetInstance()->SendNotification(new RecognitionSucceded());
 }
 
+void RecognitionPage::OnTrain()
+{
+	Algorithms::Recognition_Parameters params;
+	if (!_SetParameters(&params))
+		return;
+
+	mh_reporter->Flush();
+	std::wstring algo_name;
+	m_property_grid.GetItemValue(m_algo_combobox, algo_name);
+	VERIFY(AlgorithmsInstance->SetCurrentAnalyzer(algo_name, mp_owner->GetType()));
+	AlgorithmsInstance->Train(params, mh_reporter);
+	mp_owner->UpdateModeState();
+
+	IRS::DatabaseInstance->Update();
+
+	NotificationManager::GetInstance()->SendNotification(new RecognitionSucceded());
+}
+
 bool RecognitionPage::_SetParameters(Algorithms::Recognition_Parameters* op_parameters)
 {
 	UpdateData(TRUE);
+	m_property_grid.GetItemValue(m_max_samples_per_symbol, (int&)op_parameters->max_samples_for_symbol);
+	m_property_grid.GetItemValue(m_show_recognition_contours, (bool&)op_parameters->m_show_contours);
+
+	m_property_grid.GetItemValue(m_path_to_train_folder, (std::wstring&)op_parameters->path_to_samples);
+	m_property_grid.GetItemValue(m_classification_file, (std::wstring&)op_parameters->classification_file);
+	m_property_grid.GetItemValue(m_images_file, (std::wstring&)op_parameters->images_file);
+
 	return true;
 }
 

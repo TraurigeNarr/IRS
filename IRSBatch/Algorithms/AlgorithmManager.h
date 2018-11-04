@@ -29,6 +29,9 @@ public:
   template <typename Params>
   bool Analyze(Params& i_parameters, std::shared_ptr<Algorithms::Reporters::Reporter> ih_reporter = nullptr);
 
+  template <typename Params>
+  void Train(Params& i_parameters, std::shared_ptr<Algorithms::Reporters::Reporter> ih_reporter = nullptr);
+
   bool SetCurrentAnalyzer(const std::wstring& i_analyzer_name, int i_mode);
   void AddAnalyzer(TAnalyzerImpl ip_analyzer);
 
@@ -51,6 +54,21 @@ bool AlgorithmManager::Analyze(Params& i_parameters, std::shared_ptr<Algorithms:
   p_analyzer_impl->SetParameters(i_parameters);
 
   return p_analyzer_impl->Analyze(ih_reporter);
+}
+
+template <typename Params>
+void AlgorithmManager::Train(Params& i_parameters, std::shared_ptr<Algorithms::Reporters::Reporter> ih_reporter)
+{
+	if (mp_current_analyzer.get() == nullptr)
+		return;
+
+	IAnalyzer<Params>* p_analyzer_impl = dynamic_cast<IAnalyzer<Params>*>(mp_current_analyzer.get());
+	if (nullptr == p_analyzer_impl)
+		return;
+
+	p_analyzer_impl->SetParameters(i_parameters);
+
+	return p_analyzer_impl->Train(ih_reporter);
 }
 
 #define AlgorithmsInstance AlgorithmManager::GetInstance()

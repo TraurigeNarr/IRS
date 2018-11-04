@@ -15,6 +15,8 @@ namespace Algorithms
 		virtual ~Recognition_KNN();
 
 		virtual bool Analyze(std::shared_ptr<Algorithms::Reporters::Reporter> i_reporter = nullptr) override;
+		virtual void Train(std::shared_ptr<Algorithms::Reporters::Reporter> i_reporter = nullptr) override;
+
 		virtual bool IsAvailableInMode(int i_mode) const override;
 	};
 }

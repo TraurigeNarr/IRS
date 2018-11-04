@@ -26,14 +26,12 @@ private:
 	std::shared_ptr<Algorithms::Reporters::Reporter> mh_reporter;
 
 	HITEM m_algo_combobox;
-	HITEM m_first_clusters_type;
-	HITEM m_radius_to_append;
-	HITEM m_center_shifting_after_iteration;
-	HITEM m_separating_type;
-	HITEM m_separating_value;
-	HITEM m_draw_first_point_as_center;
-	HITEM m_number_of_clusters;
-	HITEM m_iteration_number;
+	HITEM m_show_recognition_contours;
+	HITEM m_max_samples_per_symbol;
+
+	HITEM m_path_to_train_folder;
+	HITEM m_classification_file;
+	HITEM m_images_file;
 
 	IMode* mp_owner;
 
@@ -54,6 +52,7 @@ public:
 	afx_msg int OnCreate(LPCREATESTRUCT lpsc);
 	afx_msg void OnSize(UINT nType, int cx, int cy);
 	afx_msg void OnAnalyze();
+	afx_msg void OnTrain();
 	virtual BOOL OnInitDialog() override;
 protected:
 	virtual void DoDataExchange(CDataExchange* pDX) override;

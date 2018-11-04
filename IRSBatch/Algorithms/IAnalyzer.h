@@ -25,6 +25,7 @@ public:
   std::wstring GetName() const { return m_mode_name; }
 
   virtual bool Analyze(std::shared_ptr<Algorithms::Reporters::Reporter> i_reporter = nullptr) = 0;
+  virtual void Train(std::shared_ptr<Algorithms::Reporters::Reporter> i_reporter = nullptr) {}
   virtual bool IsAvailableInMode(int i_mode) const = 0;
 };
 

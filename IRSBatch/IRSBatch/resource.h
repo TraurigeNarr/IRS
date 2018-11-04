@@ -49,8 +49,12 @@
 #define IDS_SETTINGS_SHOW_POINT_NUMBERS 135
 #define IDS_SETTINGS_POINT_RADIUS       136
 #define IDS_VERTEXSET_NAME              137
-#define IDS_STRING138                   138
 #define IDS_RECOGNITION_MODE            138
+#define IDS_SHOW_RECOGNITION_CONTOURS   139
+#define IDS_MAX_SAMPLES_NUMBER          140
+#define IDS_PATH_TO_TRAIN_FOLDER        141
+#define IDS_CLASSIFICATION_FILE         142
+#define IDS_IMAGES_FILE                 143
 #define ID_CURSOR_POINTS                318
 #define ID_CURSOR_CORE_POINT            320
 #define IDR_TOOLBAR1                    321
@@ -95,6 +99,7 @@
 #define IDC_SETTINGS_PROPERTIES         1048
 #define IDC_SETTINGS_RESET_ALL          1049
 #define IDC_RECOGNIZE_BUTTON            1050
+#define IDC_TRAIN_BUTTON                1051
 #define ID_MODE_SIMPLEMODE              32771
 #define ID_MODE_CLUSTERING              32772
 #define IDT_MAIN_TOOLBAR                32774
@@ -111,7 +116,7 @@
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_NEXT_RESOURCE_VALUE        336
 #define _APS_NEXT_COMMAND_VALUE         32780
-#define _APS_NEXT_CONTROL_VALUE         1051
+#define _APS_NEXT_CONTROL_VALUE         1052
 #define _APS_NEXT_SYMED_VALUE           310
 #endif
 #endif

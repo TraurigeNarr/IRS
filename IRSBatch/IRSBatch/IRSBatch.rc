@@ -132,6 +132,7 @@ FONT 8, "MS Shell Dlg", 400, 0, 0x1
 BEGIN
     PUSHBUTTON      "Recognize",IDC_RECOGNIZE_BUTTON,142,250,50,14
     CONTROL         "",IDC_ALGORITHM_PROPERTIES,"Static",SS_BLACKFRAME | SS_NOTIFY,0,0,192,248
+    PUSHBUTTON      "Train",IDC_TRAIN_BUTTON,85,250,50,14
 END
 
 
@@ -528,6 +529,11 @@ BEGIN
     IDS_SETTINGS_POINT_RADIUS "Point radius"
     IDS_VERTEXSET_NAME      "Vertex set %d"
     IDS_RECOGNITION_MODE    "Recognition mode"
+    IDS_SHOW_RECOGNITION_CONTOURS "Show recognition contours"
+    IDS_MAX_SAMPLES_NUMBER  "Max samples number per symbol"
+    IDS_PATH_TO_TRAIN_FOLDER "Path to train folder"
+    IDS_CLASSIFICATION_FILE "Classification file"
+    IDS_IMAGES_FILE         "Images file"
 END
 
 STRINGTABLE

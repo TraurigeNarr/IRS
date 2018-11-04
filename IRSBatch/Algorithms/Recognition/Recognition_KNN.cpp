@@ -11,6 +11,10 @@
 #include<opencv2/imgproc/imgproc.hpp>
 #include<opencv2/ml/ml.hpp>
 
+#include <string>
+#include <clocale>
+#include <locale>
+
 #include <experimental/filesystem>
 namespace fs = std::experimental::filesystem;
 
@@ -58,8 +62,20 @@ namespace Algorithms
 
 	};
 
-	namespace impl
+	namespace cv_impl
 	{
+		void Trace(cv::Exception& e, std::shared_ptr<Reporters::Reporter> reporter)
+		{
+			if (reporter) {
+				reporter->ReportMultiple(L"Exception", Reporters::NewLine,
+										 L"File: ", e.file.c_str(), Reporters::NewLine,
+										 L"Func: ", e.func.c_str(), Reporters::NewLine,
+										 L"Line: ", e.line, Reporters::NewLine,
+										 L"Code: ", e.code, Reporters::NewLine,
+										 L"Message: ", e.msg.c_str(), Reporters::NewLine);
+			}
+		}
+
 		// possible chars we are interested in are digits 0 through 9 and capital letters A through Z, put these in vector intValidChars
 		std::vector<int> intValidChars = { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9',
 			'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J',
@@ -134,10 +150,33 @@ namespace Algorithms
 																						// data types that KNearest.train accepts
 		}
 
-
-		void Train()
+		std::string convert_to_string(const std::wstring& ws)
 		{
-			std::string path_to_data = "G:/Development/Neural/input/A_Z_Handwritten_Data/output/";
+			if (ws.empty())
+				return std::string{};
+			std::setlocale(LC_ALL, "");
+			const std::locale locale("");
+			typedef std::codecvt<wchar_t, char, std::mbstate_t> converter_type;
+			const converter_type& converter = std::use_facet<converter_type>(locale);
+			std::vector<char> to(ws.length() * converter.max_length());
+			std::mbstate_t state;
+			const wchar_t* from_next;
+			char* to_next;
+			const converter_type::result result = converter.out(state, ws.data(), ws.data() + ws.length(), from_next, &to[0], &to[0] + to.size(), to_next);
+			if (result == converter_type::ok || result == converter_type::noconv) {
+				const std::string s(&to[0], to_next);
+				return s;
+			}
+			return std::string{};
+		}
+
+		void Train(std::shared_ptr<Reporters::Reporter> reporter, const Recognition_Parameters& parameters)
+		{
+			//std::string path_to_data = "G:/Development/Neural/input/A_Z_Handwritten_Data/output/";
+			const std::string path_to_data = convert_to_string(parameters.path_to_samples);
+			const std::string path_to_classes = convert_to_string(parameters.classification_file);
+			const std::string path_to_images = convert_to_string(parameters.images_file);
+
 			// these are our training images, due to the data types that the KNN object KNearest requires, we have to declare a single Mat,
 			// then append to it as though it's a vector, also we will have to perform some conversions before writing to file later
 			cv::Mat matTrainingImagesAsFlattenedFloats;
@@ -155,36 +194,38 @@ namespace Algorithms
 					int count = 0;
 					for (auto& f_name : fs::directory_iterator(p))
 					{
-						if (count >= 1000)
+						if (count >= parameters.max_samples_for_symbol)
 							break;
 						try
 						{
 							TrainOnImage(matTrainingImagesAsFlattenedFloats, matClassificationInts, f_name.path().generic_string(), sym);
+							++count;
 						}
-						catch (...)
+						catch (cv::Exception& e)
 						{
-							std::cerr << "badly.." << std::endl;
+							Trace(e, reporter);
 						}
-						++count;
 					}
 				}
 			} // complete training
 
-			cv::FileStorage fsClassifications("classifications.xml", cv::FileStorage::WRITE);           // open the classifications file
+			cv::FileStorage fsClassifications(path_to_classes, cv::FileStorage::WRITE);           // open the classifications file
 
-			if (fsClassifications.isOpened() == false) {                                                        // if the file was not opened successfully
-				std::cout << "error, unable to open training classifications file, exiting program\n\n";        // show error message
-				return;                                                                                      // and exit program
+			if (fsClassifications.isOpened() == false) {
+				if (reporter) {
+					reporter->ReportMultiple("error, unable to open training classifications file, exiting program", Reporters::NewLine);
+				}
+				return;
 			}
 
 			fsClassifications << "classifications" << matClassificationInts;        // write classifications into classifications section of classifications file
 			fsClassifications.release();                                            // close the classifications file
 
-			cv::FileStorage fsTrainingImages("images.xml", cv::FileStorage::WRITE);         // open the training images file
+			cv::FileStorage fsTrainingImages(path_to_images, cv::FileStorage::WRITE);         // open the training images file
 
-			if (fsTrainingImages.isOpened() == false) {                                                 // if the file was not opened successfully
-				std::cout << "error, unable to open training images file, exiting program\n\n";         // show error message
-				return;                                                                              // and exit program
+			if (fsTrainingImages.isOpened() == false) {            
+				reporter->ReportMultiple("error, unable to open training images file, exiting program", Reporters::NewLine);
+				return;
 			}
 
 			fsTrainingImages << "images" << matTrainingImagesAsFlattenedFloats;         // write training images into images section of images file
@@ -374,7 +415,6 @@ namespace Algorithms
 
 	bool Recognition_KNN::Analyze(std::shared_ptr<Algorithms::Reporters::Reporter> i_reporter /*= nullptr*/)
 	{
-		impl::Train();
 		Recognition_Parameters& params = GetParameters();
 
 		double max_x = 0;
@@ -394,22 +434,47 @@ namespace Algorithms
 
 		bool success = cv::imwrite("test.png", source_image);
 		if (!success) {
+			i_reporter->ReportMultiple(L"Cannot save temporary file", Reporters::NewLine);
 			return false;
 		}
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////
 		try
 		{
-			RecognizeData("test.png", "classifications.xml", "images.xml", i_reporter, false);
+			const std::string path_to_classes = cv_impl::convert_to_string(GetParameters().classification_file);
+			const std::string path_to_images = cv_impl::convert_to_string(GetParameters().images_file);
+			RecognizeData("test.png", path_to_classes, path_to_images, i_reporter, params.m_show_contours);
+		}
+		catch (cv::Exception& e)
+		{
+			cv_impl::Trace(e, i_reporter);
 		}
 		catch (...)
 		{
 			if (i_reporter) {
-				i_reporter->Report(L"Error occured");
+				i_reporter->ReportMultiple(L"Unknown error", Reporters::NewLine);
 			}
 		}
 
 		return true;
+	}
+
+	void Recognition_KNN::Train(std::shared_ptr<Algorithms::Reporters::Reporter> i_reporter /*= nullptr*/)
+	{
+		try
+		{
+			cv_impl::Train(i_reporter, GetParameters());
+		}
+		catch (cv::Exception& e)
+		{
+			cv_impl::Trace(e, i_reporter);
+		}
+		catch (...)
+		{
+			if (i_reporter) {
+				i_reporter->ReportMultiple(L"Unknown error", Reporters::NewLine);
+			}
+		}
 	}
 
 } // Algorithms
