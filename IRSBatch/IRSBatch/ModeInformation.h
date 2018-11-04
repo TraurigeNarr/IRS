@@ -10,6 +10,7 @@ private:
   size_t        m_next_core_point_index;
   size_t        m_next_point_index;
   size_t        m_next_name_index;
+  size_t        m_next_vset_index;
   bool          m_draw_class_division_functions;
   bool          m_draw_class_decision_functions;
   bool          m_log_on_each_iteration;
@@ -31,6 +32,7 @@ public:
   std::wstring    GetNextClusterName();
   int             GetNextColorRGBA();
   size_t          GetNextPointIndex();
+  size_t          GetNextVSetIndex();
   MouseType       GetMouseType();
   void            SetCurrentMouse(MouseType i_type);
   

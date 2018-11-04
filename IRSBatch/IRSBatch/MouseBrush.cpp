@@ -10,6 +10,7 @@
 #include "RendererFrame.h"
 #include "TabController.h"
 #include "Vertex.h"
+#include "VertexSet.h"
 
 #include "resource.h"
 
@@ -38,26 +39,16 @@ void MouseBrush::OnDeactivate()
 
 void MouseBrush::MouseClicked(CView* ip_view, WPARAM wParam, LPARAM lParam)
 {
-	CRendererFrame* render_frame = dynamic_cast<CRendererFrame*>(ip_view);
-
-	if (nullptr == render_frame || !m_active)
-		return;
-
-	int xPos = GET_X_LPARAM(lParam);
-	int yPos = GET_Y_LPARAM(lParam);
-
-	CMainFrame* pMainWnd = (CMainFrame *)AfxGetMainWnd();
-	ModeInformation& mode_info = pMainWnd->GetController()->GetCurrentMode()->GetInformation();
-
-	Vertex* v = new Vertex(IRS::DatabaseInstance->GetGrid()->GetPoint(xPos, yPos), mode_info.GetNextPointIndex());
-
-	IRS::DatabaseInstance->RegisterItem(v);
-	render_frame->Invalidate();
 }
 
 void MouseBrush::MouseDown(CView* ip_view, int x, int y)
 {
 	m_pressed = true;
+
+	CMainFrame* pMainWnd = (CMainFrame *)AfxGetMainWnd();
+	ModeInformation& mode_info = pMainWnd->GetController()->GetCurrentMode()->GetInformation();
+	mp_current_set = new VertexSet(mode_info.GetNextVSetIndex());
+	IRS::DatabaseInstance->RegisterItem(mp_current_set);
 
 	TryAddPoint(ip_view, x, y);
 }
@@ -65,6 +56,7 @@ void MouseBrush::MouseDown(CView* ip_view, int x, int y)
 void MouseBrush::MouseUp(CView* ip_view, int x, int y)
 {
 	m_pressed = false;
+	mp_current_set = nullptr;
 }
 
 void MouseBrush::Move(CView* ip_view, int x, int y)
@@ -77,12 +69,17 @@ void MouseBrush::Move(CView* ip_view, int x, int y)
 
 void MouseBrush::TryAddPoint(CView* ip_view, int x, int y)
 {
+	Assert(mp_current_set != nullptr);
+	if (mp_current_set == nullptr)
+		return;
+
 	CRendererFrame* render_frame = dynamic_cast<CRendererFrame*>(ip_view);
 
 	if (nullptr == render_frame || !m_active)
 		return;
 
-	if (std::abs(x - m_prev_x) < 2 && std::abs(y - m_prev_y) < 2)
+	int change = std::abs(x - m_prev_x) + std::abs(y - m_prev_y);
+	if (change < 2)
 		return;
 
 	m_prev_x = x;
@@ -91,8 +88,7 @@ void MouseBrush::TryAddPoint(CView* ip_view, int x, int y)
 	CMainFrame* pMainWnd = (CMainFrame *)AfxGetMainWnd();
 	ModeInformation& mode_info = pMainWnd->GetController()->GetCurrentMode()->GetInformation();
 
-	Vertex* v = new Vertex(IRS::DatabaseInstance->GetGrid()->GetPoint(x, y), mode_info.GetNextPointIndex());
+	mp_current_set->AddVertex(Vertex(IRS::DatabaseInstance->GetGrid()->GetPoint(x, y), mode_info.GetNextPointIndex()));
 
-	IRS::DatabaseInstance->RegisterItem(v);
 	render_frame->Invalidate();
 }

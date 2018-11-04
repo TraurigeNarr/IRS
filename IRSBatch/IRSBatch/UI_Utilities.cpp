@@ -10,6 +10,7 @@
 #include "NotificationManager.h"
 #include "TreeCtrlEx.h"
 #include "Vertex.h"
+#include "VertexSet.h"
 
 //////////////////////////////////////////////////////////////////////////
 
@@ -29,6 +30,21 @@ namespace UI_Utilities
     ip_control->SetItemData(hPoint , (DWORD)ip_vertex);
     ip_control->SetItemColor(hPoint , RGB(0,0,150));
     return hPoint;
+  }
+
+  HTREEITEM AddVertexSet(CTreeCtrlEx* ip_control, VertexSet* ip_vertex, HTREEITEM hRoot /*= nullptr*/)
+  {
+	  CString name;
+	  name.Format(IDS_VERTEXSET_NAME, ip_vertex->GetIndex());
+	  HTREEITEM hPoint = nullptr;
+	  if (hRoot)
+		  hPoint = ip_control->InsertItem(name.GetBuffer(), hRoot);
+	  else
+		  hPoint = ip_control->InsertItem(name.GetBuffer());
+
+	  ip_control->SetItemData(hPoint, (DWORD)ip_vertex);
+	  ip_control->SetItemColor(hPoint, RGB(0, 0, 150));
+	  return hPoint;
   }
 
   HTREEITEM AddCluster(CTreeCtrlEx* ip_control, ClusterRenderer* ip_cluster, MathBase::TPointCloud* o_points_affected /*= nullptr*/)

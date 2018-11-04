@@ -486,6 +486,7 @@ BEGIN
     IDS_SETTINGS_LOG_ON_EACH_ITERATION "Log on each iteration"
     IDS_SETTINGS_SHOW_POINT_NUMBERS "Show point numbers"
     IDS_SETTINGS_POINT_RADIUS "Point radius"
+    IDS_VERTEXSET_NAME      "Vertex set %d"
 END
 
 STRINGTABLE

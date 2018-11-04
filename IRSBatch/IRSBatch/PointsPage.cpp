@@ -14,6 +14,7 @@
 #include "Notifications.h"
 #include "UI_Utilities.h"
 #include "Vertex.h"
+#include "VertexSet.h"
 
 //////////////////////////////////////////////////////////////////////////
 
@@ -123,6 +124,8 @@ void PointsPage::AddItem(IRenderable* ip_item)
     UI_Utilities::AddCluster(&m_items_list, p_cluster);
   else if (Vertex* p_vertex = dynamic_cast<Vertex*>(ip_item))
     UI_Utilities::AddVertex(&m_items_list, p_vertex);
+  else if (VertexSet* p_vertex_set = dynamic_cast<VertexSet*>(ip_item))
+	  UI_Utilities::AddVertexSet(&m_items_list, p_vertex_set);
 }
 
 void PointsPage::FullUpdate()
@@ -224,6 +227,8 @@ void PointsPage::HandleNotification(INotificationData* ip_data)
         UI_Utilities::AddClassHandler(&m_items_list, p_class);
       else if (Vertex* p_vertex = dynamic_cast<Vertex*>(p_notification->mp_renderable))
         UI_Utilities::AddVertex(&m_items_list, p_vertex);
+	  else if (VertexSet* p_vertex_set = dynamic_cast<VertexSet*>(p_notification->mp_renderable))
+		  UI_Utilities::AddVertexSet(&m_items_list, p_vertex_set);
     }
     else if (p_notification->m_state == ItemChanged::IS_REMOVED)
       UI_Utilities::FullUpdateTreeCtrl(&m_items_list);

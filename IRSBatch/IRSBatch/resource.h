@@ -48,6 +48,7 @@
 #define IDS_SETTINGS_LOG_ON_EACH_ITERATION 134
 #define IDS_SETTINGS_SHOW_POINT_NUMBERS 135
 #define IDS_SETTINGS_POINT_RADIUS       136
+#define IDS_VERTEXSET_NAME              137
 #define ID_CURSOR_POINTS                318
 #define ID_CURSOR_CORE_POINT            320
 #define IDR_TOOLBAR1                    321

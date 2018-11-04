@@ -2,6 +2,8 @@
 
 #include "IMouse.h"
 
+class VertexSet;
+
 class MouseBrush : public IMouse
 {
 public:
@@ -24,4 +26,6 @@ private:
 
 	int m_prev_x = 0;
 	int m_prev_y = 0;
+
+	VertexSet* mp_current_set = nullptr;
 };

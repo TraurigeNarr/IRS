@@ -112,6 +112,7 @@ ModeInformation::ModeInformation()
 	, m_name_template(L"Cluster")
 	, m_next_name_index(0)
 	, m_next_point_index(0)
+	, m_next_vset_index(0)
 	, m_mouse_type(MOUSE_SIMPLE)
 	, m_grid_divisions_number(10)
 	, m_draw_class_decision_functions(false)
@@ -177,6 +178,11 @@ int ModeInformation::GetNextColorRGBA()
 size_t ModeInformation::GetNextPointIndex()
 {
 	return ++m_next_point_index;
+}
+
+size_t ModeInformation::GetNextVSetIndex()
+{
+	return ++m_next_vset_index;
 }
 
 MouseType ModeInformation::GetMouseType()

@@ -113,10 +113,7 @@ void ClusteringMode::HandleNotification(INotificationData* ip_data)
 {
   if (ItemChanged* p_notification = dynamic_cast<ItemChanged*>(ip_data))
   {
-    if (p_notification->m_state == ItemChanged::IS_ADDED)
-      m_points_page.AddItem(p_notification->mp_renderable);
-    else
-      m_points_page.FullUpdate();
+    
   }
   else if (dynamic_cast<DatabaseCleared*>(ip_data) != nullptr)
     m_points_page.DeleteAllItems();
