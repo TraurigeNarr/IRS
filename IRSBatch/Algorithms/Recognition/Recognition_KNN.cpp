@@ -272,8 +272,11 @@ namespace Algorithms
 		cv::FileStorage fsClassifications(classification_file, cv::FileStorage::READ);        // open the classifications file
 
 		if (fsClassifications.isOpened() == false) {                                                    // if the file was not opened successfully
-			std::cout << "error, unable to open training classifications file, exiting program\n\n";    // show error message
-			return(0);                                                                                  // and exit program
+			if (i_reporter)
+			{
+				i_reporter->ReportMultiple(L"Error: unable to open training classifications file, exiting program", Reporters::NewLine);
+			}
+			return std::string{};
 		}
 
 		fsClassifications["classifications"] >> matClassificationInts;      // read classifications section into Mat classifications variable
@@ -285,9 +288,11 @@ namespace Algorithms
 
 		cv::FileStorage fsTrainingImages(image_file, cv::FileStorage::READ);          // open the training images file
 
-		if (fsTrainingImages.isOpened() == false) {                                                 // if the file was not opened successfully
-			std::cout << "error, unable to open training images file, exiting program\n\n";         // show error message
-			return(0);                                                                              // and exit program
+		if (fsTrainingImages.isOpened() == false) {
+			if (i_reporter) {
+				i_reporter->ReportMultiple(L"Error: unable to open training images file, exiting program", Reporters::NewLine);
+			}
+			return std::string{};
 		}
 
 		fsTrainingImages["images"] >> matTrainingImagesAsFlattenedFloats;           // read images section into Mat training images variable
@@ -305,9 +310,11 @@ namespace Algorithms
 
 		cv::Mat matTestingNumbers = cv::imread(file_name);            // read in the test numbers image
 
-		if (matTestingNumbers.empty()) {                                // if unable to open image
-			std::cout << "error: image not read from file\n\n";         // show error message on command line
-			return false;                                                  // and exit program
+		if (matTestingNumbers.empty()) {
+			if (i_reporter) {
+				i_reporter->ReportMultiple(L"Error: image not read from file", Reporters::NewLine);
+			}
+			return std::string{};
 		}
 
 		cv::Mat matGrayscale;           //
@@ -406,7 +413,7 @@ namespace Algorithms
 
 		if (show_debug_image)
 		{
-			cv::imshow("matTestingNumbers", matTestingNumbers);     // show input image with green boxes drawn around found digits
+			cv::imshow("matTestingNumbers", matTestingNumbers);
 			cv::waitKey(0);
 		}
 
