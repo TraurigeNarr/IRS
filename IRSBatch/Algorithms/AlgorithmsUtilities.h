@@ -14,6 +14,7 @@ namespace Algorithms
 
     // random generator function:
     int RandomNumber (int i);
+	float Random(float a, float b);
 
     size_t GetFirstClusterIndex(Clustering_Parameters& io_parameters);
 

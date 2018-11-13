@@ -16,6 +16,7 @@
 #include <Algorithms/Clustering_Maxmin.h>
 #include <Algorithms/Clustering_HeuristicBorder.h>
 #include <Algorithms/Recognition/Recognition_KNN.h>
+#include <Algorithms/NeuralNetworks/Network.h>
 
 #include <algorithm>
 
@@ -112,6 +113,9 @@ int CTabController::_InitializeModes()
   AlgorithmsInstance->AddAnalyzer(p_analyzer);
   // recognition
   p_analyzer = std::make_shared<Algorithms::Recognition_KNN>(L"KNN char recognition", MT_RECOGNITION);
+  AlgorithmsInstance->AddAnalyzer(p_analyzer);
+  // neural
+  p_analyzer = std::make_shared<Algorithms::NeuralNetworkAnalyzer>(L"Neural network", MT_RECOGNITION);
   AlgorithmsInstance->AddAnalyzer(p_analyzer);
   //set mode
   SetMode(MT_SIMPLE);

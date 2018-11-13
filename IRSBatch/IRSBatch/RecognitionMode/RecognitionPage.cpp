@@ -15,6 +15,7 @@
 
 #include <Algorithms/AlgorithmManager.h>
 #include <Algorithms/Recognition/Recognition_KNN.h>
+#include <Algorithms/NeuralNetworks/Network.h>
 #include <Algorithms/Reporter.h>
 
 

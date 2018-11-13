@@ -16,6 +16,9 @@
     <Filter Include="Algorithms\Recognition">
       <UniqueIdentifier>{c737a669-52d3-40dc-a520-da02b234af5e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Algorithms\NeuralNetworks">
+      <UniqueIdentifier>{c512ba2b-4e31-4371-baa3-26cd2334b6c8}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="targetver.h">
@@ -57,6 +60,9 @@
     <ClInclude Include="Recognition\RecognitionParameters.h">
       <Filter>Algorithms\Recognition</Filter>
     </ClInclude>
+    <ClInclude Include="NeuralNetworks\Network.h">
+      <Filter>Algorithms\NeuralNetworks</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -88,6 +94,9 @@
     </ClCompile>
     <ClCompile Include="Recognition\Recognition_KNN.cpp">
       <Filter>Algorithms\Recognition</Filter>
+    </ClCompile>
+    <ClCompile Include="NeuralNetworks\Network.cpp">
+      <Filter>Algorithms\NeuralNetworks</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

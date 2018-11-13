@@ -29,6 +29,11 @@ namespace Algorithms
       return std::rand()%i;
     }
 
+	float Random(float a, float b)
+	{
+		return a + static_cast <float> (rand()) / (static_cast <float> (RAND_MAX / (b - a)));
+	}
+
     size_t GetFirstClusterIndex(Clustering_Parameters& io_parameters)
     {
       using namespace Algorithms;
