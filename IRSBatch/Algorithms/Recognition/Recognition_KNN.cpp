@@ -12,8 +12,6 @@
 #include<opencv2/ml/ml.hpp>
 
 #include <string>
-#include <clocale>
-#include <locale>
 
 #include <experimental/filesystem>
 namespace fs = std::experimental::filesystem;
@@ -148,26 +146,6 @@ namespace Algorithms
 			cv::Mat matImageFlattenedFloat = matImageFloat.reshape(1, 1);       // flatten
 			matTrainingImagesAsFlattenedFloats.push_back(matImageFlattenedFloat);       // add to Mat as though it was a vector, this is necessary due to the
 																						// data types that KNearest.train accepts
-		}
-
-		std::string convert_to_string(const std::wstring& ws)
-		{
-			if (ws.empty())
-				return std::string{};
-			std::setlocale(LC_ALL, "");
-			const std::locale locale("");
-			typedef std::codecvt<wchar_t, char, std::mbstate_t> converter_type;
-			const converter_type& converter = std::use_facet<converter_type>(locale);
-			std::vector<char> to(ws.length() * converter.max_length());
-			std::mbstate_t state;
-			const wchar_t* from_next;
-			char* to_next;
-			const converter_type::result result = converter.out(state, ws.data(), ws.data() + ws.length(), from_next, &to[0], &to[0] + to.size(), to_next);
-			if (result == converter_type::ok || result == converter_type::noconv) {
-				const std::string s(&to[0], to_next);
-				return s;
-			}
-			return std::string{};
 		}
 
 		void Train(std::shared_ptr<Reporters::Reporter> reporter, const Recognition_Parameters& parameters)
@@ -448,8 +426,8 @@ namespace Algorithms
 		///////////////////////////////////////////////////////////////////////////////////////////////////
 		try
 		{
-			const std::string path_to_classes = cv_impl::convert_to_string(GetParameters().classification_file);
-			const std::string path_to_images = cv_impl::convert_to_string(GetParameters().images_file);
+			const std::string path_to_classes = convert_to_string(GetParameters().classification_file);
+			const std::string path_to_images = convert_to_string(GetParameters().images_file);
 			RecognizeData("test.png", path_to_classes, path_to_images, i_reporter, params.m_show_contours);
 		}
 		catch (cv::Exception& e)
