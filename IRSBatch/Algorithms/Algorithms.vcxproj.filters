@@ -19,6 +19,9 @@
     <Filter Include="Algorithms\NeuralNetworks">
       <UniqueIdentifier>{c512ba2b-4e31-4371-baa3-26cd2334b6c8}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Algorithms\cv_utils">
+      <UniqueIdentifier>{f1e31b3a-e34e-4a6a-9160-38f8eb89f65b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="targetver.h">
@@ -63,6 +66,9 @@
     <ClInclude Include="NeuralNetworks\Network.h">
       <Filter>Algorithms\NeuralNetworks</Filter>
     </ClInclude>
+    <ClInclude Include="cv_utils\cv_utils.h">
+      <Filter>Algorithms\cv_utils</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -97,6 +103,9 @@
     </ClCompile>
     <ClCompile Include="NeuralNetworks\Network.cpp">
       <Filter>Algorithms\NeuralNetworks</Filter>
+    </ClCompile>
+    <ClCompile Include="cv_utils\cv_utils.cpp">
+      <Filter>Algorithms\cv_utils</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

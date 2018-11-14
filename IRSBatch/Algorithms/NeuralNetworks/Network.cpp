@@ -5,12 +5,18 @@
 #include "AlgorithmsUtilities.h"
 
 #include <Reporter.h>
+#include <MathBase/math/Vector3D.h>
+
+#include <cv_utils/cv_utils.h>
 
 namespace Algorithms
 {
 
 	namespace neural_impl
 	{
+		static constexpr int RESIZED_IMAGE_WIDTH = 20;
+		static constexpr int RESIZED_IMAGE_HEIGHT = 30;
+
 
 		float sigmoid(float z)
 		{
@@ -20,7 +26,6 @@ namespace Algorithms
 		class NeuralNetwork
 		{
 		public:
-
 			void Clear()
 			{
 				_biases.clear();
@@ -28,9 +33,13 @@ namespace Algorithms
 				_sizes.clear();
 			}
 
-			void Create(const std::vector<size_t>& layers)
+			void Create(const std::vector<size_t>& layers, const std::vector<std::string>& values)
 			{
 				if (layers.size() < 2u) {
+					return;
+				}
+
+				if (layers[layers.size() - 1] != values.size()) {
 					return;
 				}
 
@@ -61,9 +70,11 @@ namespace Algorithms
 						}
 					}
 				}
+
+				_values = values;
 			}
 
-			std::vector<float> Evaluate(const std::vector<float>& input)
+			std::vector<float> Evaluate(const std::vector<float>& input) const
 			{
 				if (input.size() != _sizes[0]) {
 					return std::vector<float>{};
@@ -95,16 +106,23 @@ namespace Algorithms
 				return result;
 			}
 
+			const std::string& GetValue(const std::vector<float>& evaluated) const
+			{
+				int max_ind = 0;
+				float max_val = -100000000000.0f;
+				for (int i = 0; i < evaluated.size(); ++i) {
+					if (evaluated[i] > max_val) {
+						max_val = evaluated[i];
+						max_ind = i;
+					}
+				}
+
+				return _values[max_ind];
+			}
+
 		private:
 			using Layer = std::vector<float>;
 			using Biases = std::vector<Layer>;
-			struct Link
-			{
-				size_t to;
-				float weight;
-			};
-
-			using Links = std::vector<Link>;
 
 			using Floats = std::vector<float>;
 			using LayerToLayerWeights = std::vector<Floats>;
@@ -113,7 +131,58 @@ namespace Algorithms
 			Weights _weights;
 
 			std::vector<size_t> _sizes;
+			std::vector<std::string> _values;
 		};
+
+		std::string RecognizeData(const NeuralNetwork& network,
+								  const std::vector<Vector3D>& points,
+								  std::shared_ptr<Algorithms::Reporters::Reporter> i_reporter, bool show_debug_image)
+		{
+			cv::Mat source_image = cv_utils::create_image(points);
+			bool success = cv::imwrite("test.png", source_image);
+			if (!success) {
+				return std::string{};
+			}
+			source_image = cv::imread("test.png");
+			cv::Mat prepared = cv_utils::prepare_image(source_image);
+
+			std::vector<cv_utils::ContourWithData> validContoursWithData = cv_utils::find_contours(prepared);
+
+			cv::Scalar colors[7] = {
+				cv::Scalar(255, 0, 0),
+				cv::Scalar(0, 255, 0),
+				cv::Scalar(0, 0, 255),
+				cv::Scalar(255, 255, 0),
+				cv::Scalar(255, 0, 255),
+				cv::Scalar(0, 255, 255),
+				cv::Scalar(255, 255, 255),
+			};
+
+			std::string resulted_string = "";
+
+			for (int i = 0; i < validContoursWithData.size(); i++) {
+				cv::rectangle(source_image, validContoursWithData[i].boundingRect, colors[i % 6], 2);
+				cv::Mat matROI = prepared(validContoursWithData[i].boundingRect);
+
+				cv::Mat matROIResized;
+				cv::resize(matROI, matROIResized, cv::Size(RESIZED_IMAGE_WIDTH, RESIZED_IMAGE_HEIGHT));
+
+				cv::Mat matROIFloat;
+				matROIResized.convertTo(matROIFloat, CV_32FC1);
+
+				cv::Mat matROIFlattenedFloat = matROIFloat.reshape(1, 1);
+
+				cv::Mat matCurrentChar(0, 0, CV_32F);
+
+				std::vector<float> input;
+				input.resize(RESIZED_IMAGE_WIDTH * RESIZED_IMAGE_HEIGHT);
+				input = matROIFlattenedFloat;
+				auto result = network.Evaluate(input);
+				resulted_string += network.GetValue(result);
+			}
+
+			return resulted_string;
+		}
 
 	} // neural_impl
 
@@ -135,20 +204,25 @@ namespace Algorithms
 
 	bool NeuralNetworkAnalyzer::Analyze(std::shared_ptr<Algorithms::Reporters::Reporter> i_reporter)
 	{
-		mp_impl->Create({ 2, 3, 5, 10 });
-		auto vec = mp_impl->Evaluate({ 0.2f, 1.0f });
-		i_reporter->Report(Reporters::NewLine);
-		int max_ind = 0;
-		float max_val = -100000000000.0f;
-		for (int i = 0; i < vec.size(); ++i) {
-			i_reporter->ReportMultiple(vec[i], " ");
-			if (vec[i] > max_val) {
-				max_val = vec[i];
-				max_ind = i;
-			}
+		const size_t input_size = neural_impl::RESIZED_IMAGE_WIDTH * neural_impl::RESIZED_IMAGE_HEIGHT;
+		const size_t output_size = 'Z' - 'A' + 1;
+		std::vector<std::string> output;
+		output.resize(output_size);
+		for (size_t i = 0; i < output_size; ++i) {
+			output[i] = char('A' + i);
 		}
-		i_reporter->ReportMultiple(Reporters::NewLine, L"=========================", Reporters::NewLine);
-		i_reporter->ReportMultiple(L"Max ind: ", max_ind);
+
+		mp_impl->Create({ input_size, 15, output_size }, output);
+
+		Recognition_Parameters& params = GetParameters();
+		
+		const std::string result = neural_impl::RecognizeData(*mp_impl, params.m_points, i_reporter, false);
+
+		if (i_reporter)
+		{
+			i_reporter->ReportMultiple(L"Result: ", result.c_str(), Reporters::NewLine);
+			i_reporter->ReportMultiple(L"End recognition", Reporters::NewLine, L"==========================", Reporters::NewLine);
+		}
 
 		return true;
 	}

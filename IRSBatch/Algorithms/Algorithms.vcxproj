@@ -333,6 +333,7 @@
     <ClInclude Include="ClusteringParameters.h" />
     <ClInclude Include="Clustering_HeuristicBorder.h" />
     <ClInclude Include="Clustering_Maxmin.h" />
+    <ClInclude Include="cv_utils\cv_utils.h" />
     <ClInclude Include="IAnalyzer.h" />
     <ClInclude Include="NeuralNetworks\Network.h" />
     <ClInclude Include="Recognition\RecognitionParameters.h" />
@@ -348,6 +349,7 @@
     <ClCompile Include="ClusteringK_Means.cpp" />
     <ClCompile Include="Clustering_HeuristicBorder.cpp" />
     <ClCompile Include="Clustering_Maxmin.cpp" />
+    <ClCompile Include="cv_utils\cv_utils.cpp" />
     <ClCompile Include="NeuralNetworks\Network.cpp" />
     <ClCompile Include="Recognition\Recognition_KNN.cpp" />
     <ClCompile Include="Reporter.cpp" />
