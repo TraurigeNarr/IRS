@@ -7,14 +7,24 @@ namespace Algorithms
 {
 	namespace neural_impl
 	{
-		class NeuralNetwork;
+		class NetworkBase
+		{
+		public:
+			virtual ~NetworkBase() {}
+
+			virtual std::vector<float> Evaluate(const std::vector<float>& input, std::shared_ptr<Algorithms::Reporters::Reporter> i_reporter) const = 0;
+			virtual const std::string& GetValue(const std::vector<float>& output) const = 0;
+			virtual void Train(const Recognition_Parameters& params, std::shared_ptr<Algorithms::Reporters::Reporter> i_reporter) = 0;
+			virtual bool IsEmpty() const = 0;
+			virtual void Create(const Recognition_Parameters& params) = 0;
+		};
 	}
 
 	class NeuralNetworkAnalyzer : public IAnalyzer<Recognition_Parameters>
 	{
 	private:
 		int m_mode;
-		std::unique_ptr<neural_impl::NeuralNetwork> mp_impl;
+		std::unique_ptr<neural_impl::NetworkBase> mp_impl;
 
 
 	public:
